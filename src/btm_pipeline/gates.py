@@ -122,17 +122,20 @@ def evaluate_release(manifest: dict[str, Any]) -> dict[str, Any]:
         check_technical(manifest),
         check_security(manifest),
     ]
-    policy = manifest.get("policy")
-    policy = policy if isinstance(policy, dict) else {}
+    policy_value = manifest.get("policy")
+    policy_present = isinstance(policy_value, dict)
+    policy = policy_value if policy_present else {}
     private_tests_passed = policy.get("staged_private_tests_passed") is True
     activation_authorized = policy.get("owner_public_activation_authorized") is True
     public_enabled = policy.get("public_publishing_enabled") is True
 
     mandatory_pass = all(gate.passed for gate in gates if gate.mandatory)
     # This field means gates are ready for private review, not ready for public release.
-    review_ready = mandatory_pass
+    review_ready = mandatory_pass and policy_present
     public_publish_allowed = review_ready and private_tests_passed and activation_authorized and public_enabled
     blockers = [f"{gate.name}: {'; '.join(gate.details)}" for gate in gates if gate.mandatory and not gate.passed]
+    if not policy_present:
+        blockers.append("policy object is missing or invalid")
     if not private_tests_passed:
         blockers.append("staged private end-to-end tests have not passed")
     if not activation_authorized:
