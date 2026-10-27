@@ -73,25 +73,18 @@ def check_claim_evidence(manifest: dict[str, Any]) -> GateResult:
 
 
 def check_asset_rights(manifest: dict[str, Any]) -> GateResult:
-    assets = _items(manifest, "assets")
-    if not assets:
-        return GateResult("asset_rights", False, True, ("no asset rights ledger supplied",))
-    problems: list[str] = []
-    for index, asset in enumerate(assets):
-        asset_id = str(asset.get("asset_id", "")).strip() or f"asset #{index + 1}"
-        for field in ("source_url", "license_url", "proof_url"):
-            if not _is_http_url(asset.get(field)):
-                problems.append(f"{asset_id}: missing or invalid {field}")
-        license_name = asset.get("license_name")
-        if not isinstance(license_name, str) or not license_name.strip():
-            problems.append(f"{asset_id}: license_name is unresolved")
-        if asset.get("rights_reviewed") is not True:
-            problems.append(f"{asset_id}: rights_reviewed must be true")
-        if asset.get("attribution_required") is True and not str(asset.get("attribution_text", "")).strip():
-            problems.append(f"{asset_id}: required attribution text is missing")
+    from .rights import validate_asset_rights_ledger
+
+    report = validate_asset_rights_ledger({"assets": manifest.get("assets")})
+    problems = report.get("blockers", [])
     return GateResult(
-        "asset_rights", not problems, True,
-        tuple(problems) or (f"{len(assets)} asset(s) have documented rights fields; documentation is not a legal guarantee",),
+        "asset_rights",
+        report.get("passed") is True,
+        True,
+        tuple(problems) or (
+            f"{report.get('asset_count', 0)} asset(s) have structurally complete rights records; "
+            "human review is still required and this is not a legal guarantee",
+        ),
     )
 
 
