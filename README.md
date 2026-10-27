@@ -4,7 +4,7 @@ A free-first, hybrid open-source + cloud-AI production system for faceless AI an
 
 ## Current status
 
-**Milestones 1–2 in progress.** The foundation includes deterministic release gates, CI, and a structured source-backed research packet validator. This is not yet a complete automated video production system.
+**Milestones 1–3 in progress.** The foundation includes deterministic release gates, a structured research packet validator, and a fail-closed asset rights/provenance ledger. This is not yet a complete automated video production system.
 
 - Public publishing is **disabled by default**.
 - No paid APIs, subscriptions, or spend are enabled.
@@ -32,13 +32,14 @@ On Android/Termux, use Termux's available Python and create the virtual environm
 
 - [Architecture](docs/ARCHITECTURE.md)
 - [Research workflow](docs/RESEARCH.md)
+- [Asset rights and provenance](docs/ASSET_RIGHTS.md)
 - [Publishing policy](config/publishing-policy.json)
 
 ## Planned stages
 
 1. Policy and manifest validation.
 2. Source-backed research packet and claim-evidence ledger (current milestone).
-3. Rights ledger and asset provenance.
+3. Rights ledger and asset provenance (validator implemented).
 4. Script generation through a replaceable free-tier provider adapter.
 5. Narration and editing/rendering adapters.
 6. Technical, metadata, factual, rights, and security gates.
