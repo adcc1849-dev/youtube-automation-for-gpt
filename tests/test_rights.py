@@ -87,3 +87,23 @@ def test_generated_asset_requires_model_and_terms_review_date():
 def test_non_object_and_empty_ledger_fail():
     assert not validate_asset_rights_ledger(None)["passed"]
     assert not validate_asset_rights_ledger({"assets": []})["passed"]
+
+
+def test_noncommercial_license_is_rejected_even_if_boolean_claims_commercial_use():
+    asset = valid_asset()
+    asset["license_family"] = "cc_by_nc"
+    asset["license_name"] = "Creative Commons Attribution-NonCommercial"
+    asset["commercial_use_allowed"] = True
+    report = validate_asset_rights_ledger({"assets": [asset]})
+    assert report["passed"] is False
+    assert any("non-commercial Creative Commons" in item for item in report["blockers"])
+
+
+def test_no_derivatives_license_is_rejected_for_editing():
+    asset = valid_asset()
+    asset["license_family"] = "cc_by_nd"
+    asset["license_name"] = "Creative Commons Attribution-NoDerivatives"
+    asset["modification_allowed"] = True
+    report = validate_asset_rights_ledger({"assets": [asset]})
+    assert report["passed"] is False
+    assert any("no-derivatives Creative Commons" in item for item in report["blockers"])
