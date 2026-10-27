@@ -138,5 +138,5 @@ def write_snapshot(snapshot: dict[str, Any], output_path: str | Path) -> Path:
     if path.exists():
         raise AnalyticsError("snapshot output already exists; choose a new path to preserve history")
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(snapshot, indent=2, allow_nan=False) + "\\n", encoding="utf-8")
+    path.write_text(json.dumps(snapshot, indent=2, allow_nan=False) + "\n", encoding="utf-8")
     return path
