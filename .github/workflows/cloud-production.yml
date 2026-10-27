@@ -73,7 +73,7 @@ jobs:
           VOICE_CONFIG_SHA256: ${{ inputs.voice_config_sha256 }}
         run: |
           python - <<'PY'
-          import hashlib, os, re
+          import os, re
           from pathlib import Path
           from urllib.parse import urlparse
 
@@ -105,13 +105,28 @@ jobs:
           print("Voice model and sidecar SHA-256 checks passed.")
           PY
 
-      - name: Run complete production pipeline
-        id: production
+      - name: Prepare runner-specific config
         env:
           CONFIG_PATH: ${{ inputs.config_path }}
         run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          source = Path(os.environ["CONFIG_PATH"])
+          config = json.loads(source.read_text(encoding="utf-8"))
+          if not isinstance(config, dict):
+              raise SystemExit("Production config root must be a JSON object")
+          config["piper_model_path"] = "out/voice.onnx"
+          config["output_path"] = "out/episode.mp4"
+          config["report_path"] = "out/production-report.json"
+          Path("out/runtime-config.json").write_text(json.dumps(config, indent=2) + "\n", encoding="utf-8")
+          PY
+
+      - name: Run complete production pipeline
+        id: production
+        run: |
           set +e
-          btm-produce "$CONFIG_PATH" out/production-report.json
+          btm-produce out/runtime-config.json out/production-report.json
           status=$?
           echo "exit_code=$status" >> "$GITHUB_OUTPUT"
           exit 0
@@ -123,8 +138,8 @@ jobs:
           name: beyond-the-machine-production-${{ github.run_id }}
           path: |
             out/production-report.json
-            out/*.mp4
-            out/*.wav
+            out/episode.mp4
+            out/episode.narration.wav
           if-no-files-found: warn
           retention-days: 7
 
