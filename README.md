@@ -4,7 +4,7 @@ A free-first, hybrid open-source + cloud-AI production system for faceless AI an
 
 ## Current status
 
-**Milestones 1–3 in progress.** The foundation includes deterministic release gates, a structured research packet validator, and a fail-closed asset rights/provenance ledger. This is not yet a complete automated video production system.
+**Core components implemented; end-to-end production is not yet complete.** The repository now includes release gates, research and rights ledgers, script validation, opt-in Gemini drafting, all 11 skill prompts, offline Piper TTS, a local FFmpeg still-image renderer, technical QC, and bundle preflight. Staged private YouTube testing and a complete captions/advanced-editing workflow remain unfinished.
 
 - Public publishing is **disabled by default**.
 - No paid APIs, subscriptions, or spend are enabled.
@@ -47,10 +47,10 @@ On Android/Termux, use Termux's available Python and create the virtual environm
 1. Policy and manifest validation.
 2. Source-backed research packet and claim-evidence ledger (current milestone).
 3. Rights ledger and asset provenance (validator implemented).
-4. Script package validation and an opt-in Gemini draft adapter (both implemented; provider calls remain disabled by default).
+4. Script package validation, `btm-draft-script`, and an opt-in Gemini draft adapter (manual-only workflow; provider calls remain disabled by default).
 5. Narration and editing/rendering adapters (offline Piper TTS, local still-image FFmpeg renderer, and technical inspection implemented; subtitles/advanced editing remain future work).
-6. Bundle-level preflight orchestration across research, script, rights, media, and release gates (implemented).
-7. Staged private end-to-end testing.
+6. Bundle-level preflight orchestration across research, script, rights, media, and release gates (implemented), plus guarded manual invocation of all 11 skills.
+7. Staged private end-to-end testing (not yet completed; no private YouTube upload integration is enabled).
 8. Public publishing only after safeguards and explicit owner activation.
 
 ## Security and ownership
