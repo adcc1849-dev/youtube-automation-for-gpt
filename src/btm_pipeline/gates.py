@@ -129,8 +129,9 @@ def evaluate_release(manifest: dict[str, Any]) -> dict[str, Any]:
     public_enabled = policy.get("public_publishing_enabled") is True
 
     mandatory_pass = all(gate.passed for gate in gates if gate.mandatory)
-    release_ready = mandatory_pass and private_tests_passed
-    public_publish_allowed = release_ready and activation_authorized and public_enabled
+    # This field means gates are ready for private review, not ready for public release.
+    review_ready = mandatory_pass
+    public_publish_allowed = review_ready and private_tests_passed and activation_authorized and public_enabled
     blockers = [f"{gate.name}: {'; '.join(gate.details)}" for gate in gates if gate.mandatory and not gate.passed]
     if not private_tests_passed:
         blockers.append("staged private end-to-end tests have not passed")
@@ -140,7 +141,7 @@ def evaluate_release(manifest: dict[str, Any]) -> dict[str, Any]:
         blockers.append("public publishing is disabled by policy")
 
     return {
-        "release_ready_for_private_review": release_ready,
+        "release_ready_for_private_review": review_ready,
         "public_publish_allowed": public_publish_allowed,
         "gates": [gate.as_dict() for gate in gates],
         "blockers": blockers,
