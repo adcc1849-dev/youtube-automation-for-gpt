@@ -2,7 +2,7 @@ from btm_pipeline.script import validate_script_package
 
 
 def long_narration():
-    return " ".join(["Robots are changing factory work in complex ways."] * 300)
+    return " ".join(["Robots are changing factory work in complex ways."] * 50)
 
 
 def valid_package():

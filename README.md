@@ -33,6 +33,7 @@ On Android/Termux, use Termux's available Python and create the virtual environm
 - [Architecture](docs/ARCHITECTURE.md)
 - [Research workflow](docs/RESEARCH.md)
 - [Asset rights and provenance](docs/ASSET_RIGHTS.md)
+- [Script workflow](docs/SCRIPT_WORKFLOW.md)
 - [Publishing policy](config/publishing-policy.json)
 
 ## Planned stages
@@ -40,7 +41,7 @@ On Android/Termux, use Termux's available Python and create the virtual environm
 1. Policy and manifest validation.
 2. Source-backed research packet and claim-evidence ledger (current milestone).
 3. Rights ledger and asset provenance (validator implemented).
-4. Script generation through a replaceable free-tier provider adapter.
+4. Script package validation and generation through a replaceable, opt-in free-tier provider adapter (structure validator implemented).
 5. Narration and editing/rendering adapters.
 6. Technical, metadata, factual, rights, and security gates.
 7. Staged private end-to-end testing.
