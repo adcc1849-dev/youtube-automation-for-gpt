@@ -30,6 +30,24 @@ on:
         options:
           - "no"
           - "yes"
+      upload_to_youtube:
+        description: "Upload the rendered video only after all release gates pass (first test should be private)"
+        required: true
+        default: false
+        type: boolean
+      release_manifest_path:
+        description: "Repository-relative release manifest with all gates and human review explicitly passed"
+        required: false
+        type: string
+      upload_visibility:
+        description: "Requested YouTube visibility; public remains blocked by policy until owner activation"
+        required: true
+        default: "private"
+        type: choice
+        options:
+          - "private"
+          - "unlisted"
+          - "public"
 
 permissions:
   contents: read
@@ -131,6 +149,33 @@ jobs:
           echo "exit_code=$status" >> "$GITHUB_OUTPUT"
           exit 0
 
+      - name: Validate release manifest path for optional YouTube upload
+        if: inputs.upload_to_youtube
+        env:
+          RELEASE_MANIFEST_PATH: ${{ inputs.release_manifest_path }}
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          value = os.environ.get("RELEASE_MANIFEST_PATH", "").strip()
+          path = Path(value)
+          if not value or not path.is_file() or path.suffix.lower() != ".json":
+              raise SystemExit("YouTube upload requires an existing repository-relative JSON release manifest")
+          PY
+
+      - name: Upload to YouTube after production gates pass
+        if: inputs.upload_to_youtube && steps.production.outputs.exit_code == '0'
+        env:
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+          RELEASE_MANIFEST_PATH: ${{ inputs.release_manifest_path }}
+          UPLOAD_VISIBILITY: ${{ inputs.upload_visibility }}
+        run: |
+          python -m pip install -e ".[publishing]"
+          btm-publish "$RELEASE_MANIFEST_PATH" out/episode.mp4 out/upload-receipt.json --visibility "$UPLOAD_VISIBILITY"
+          echo "Upload receipt written; this confirms YouTube returned a video ID, not that post-upload processing and metadata verification are complete."
+
       - name: Upload private-run artifacts for owner review
         if: always()
         uses: actions/upload-artifact@v6
@@ -140,6 +185,7 @@ jobs:
             out/production-report.json
             out/episode.mp4
             out/episode.narration.wav
+            out/upload-receipt.json
           if-no-files-found: warn
           retention-days: 7
 
@@ -149,6 +195,6 @@ jobs:
           echo "Production did not pass. Review the production report artifact; publishing was not attempted."
           exit 1
 
-      - name: Confirm publishing remains disabled
+      - name: Confirm publication mode and policy
         if: always()
-        run: echo "This workflow only renders and uploads a private GitHub Actions artifact. It never uploads or publishes to YouTube."
+        run: echo "YouTube upload is opt-in per run. Public visibility remains blocked unless the repository publishing policy has explicit owner activation and staged private tests are recorded."
