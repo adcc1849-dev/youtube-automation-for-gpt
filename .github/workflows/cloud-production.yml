@@ -40,10 +40,15 @@ concurrency:
 
 jobs:
   render:
-    if: ${{ inputs.voice_license_reviewed == 'yes' }}
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
+      - name: Fail unless voice license review is explicitly confirmed
+        if: ${{ inputs.voice_license_reviewed != 'yes' }}
+        run: |
+          echo "Voice/model license review was not confirmed. Production is blocked; no model download or render was attempted."
+          exit 1
+
       - name: Checkout selected branch
         uses: actions/checkout@v6
 
@@ -87,10 +92,45 @@ jobs:
           for name in ("MODEL_SHA256", "VOICE_CONFIG_SHA256"):
               if not re.fullmatch(r"[0-9a-fA-F]{64}", os.environ[name]):
                   raise SystemExit(f"{name} must be a 64-character SHA-256 hex digest")
+
+          # The supplied hashes must also be recorded against the exact voice
+          # asset in the episode's rights ledger; URL/hash inputs alone are not
+          # enough to establish that the reviewed license covers this model.
+          root = Path.cwd().resolve()
+          try:
+              config_path = config.resolve(strict=True)
+              config_path.relative_to(root)
+              episode = __import__("json").loads(config_path.read_text(encoding="utf-8"))
+          except (OSError, ValueError):
+              raise SystemExit("config_path must be valid JSON inside the checked-out repository")
+          if not isinstance(episode, dict):
+              raise SystemExit("Production config root must be a JSON object")
+          voice_id = episode.get("voice_asset_id")
+          ledger_value = episode.get("voice_rights_ledger_path")
+          if not isinstance(voice_id, str) or not voice_id.strip():
+              raise SystemExit("Production config must define voice_asset_id")
+          if not isinstance(ledger_value, str) or not ledger_value.strip():
+              raise SystemExit("Production config must define voice_rights_ledger_path")
+          ledger_path = (root / ledger_value).resolve()
+          try:
+              ledger_path.relative_to(root)
+              ledger = __import__("json").loads(ledger_path.read_text(encoding="utf-8"))
+          except (OSError, ValueError):
+              raise SystemExit("voice_rights_ledger_path must be valid JSON inside the checked-out repository")
+          assets = ledger.get("assets") if isinstance(ledger, dict) else None
+          if not isinstance(assets, list):
+              raise SystemExit("Voice rights ledger must contain an assets list")
+          voice = next((a for a in assets if isinstance(a, dict) and a.get("asset_id") == voice_id), None)
+          if voice is None:
+              raise SystemExit("voice_asset_id must exist in the voice rights ledger")
+          if voice.get("model_sha256", "").lower() != os.environ["MODEL_SHA256"].lower():
+              raise SystemExit("Voice ledger model_sha256 does not match the selected model digest")
+          if voice.get("sidecar_sha256", "").lower() != os.environ["VOICE_CONFIG_SHA256"].lower():
+              raise SystemExit("Voice ledger sidecar_sha256 does not match the selected sidecar digest")
           Path("out").mkdir(exist_ok=True)
           PY
-          curl --fail --location --retry 2 --proto '=https' --tlsv1.2 "$MODEL_URL" --output out/voice.onnx
-          curl --fail --location --retry 2 --proto '=https' --tlsv1.2 "$VOICE_CONFIG_URL" --output out/voice.onnx.json
+          curl --fail --location --retry 2 --proto '=https' --proto-redir '=https' --tlsv1.2 "$MODEL_URL" --output out/voice.onnx
+          curl --fail --location --retry 2 --proto '=https' --proto-redir '=https' --tlsv1.2 "$VOICE_CONFIG_URL" --output out/voice.onnx.json
           python - <<'PY'
           import hashlib, os
           from pathlib import Path

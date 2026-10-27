@@ -8,6 +8,7 @@ This is a **manual, non-publishing** cloud render workflow. It uses a GitHub-hos
 2. Make sure the config points to repository-relative script, image assets, voice rights ledger, and production rights ledger. The workflow overrides only the model path, output path, and report path for the runner. All referenced script/images/ledgers must exist in the checkout.
 3. Choose a Piper `.onnx` model and its matching `.onnx.json` sidecar. Review the exact model/voice terms for the intended YouTube use and ensure the voice rights ledger records the same model and license evidence.
 4. Obtain the SHA-256 digest of both exact files from a trusted source or calculate it yourself. The workflow refuses a file if either digest differs. Do not rely on a URL alone as proof of licensing.
+5. In the rights-ledger record matching `voice_asset_id`, record `model_sha256` and `sidecar_sha256` for those exact files. The workflow checks that the entered digests match both downloaded files and the reviewed voice record. These digest fields bind the selected files to the record; they do not independently prove that the license is valid.
 
 ## Run it
 
