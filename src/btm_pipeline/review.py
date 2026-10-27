@@ -28,18 +28,30 @@ def review_bundle(bundle: Any) -> dict[str, Any]:
         media = {"passed": False, "blockers": ["media_path is missing; inspect a rendered file before private review"]}
 
     release_manifest = bundle.get("release_manifest")
-    release = evaluate_release(release_manifest if isinstance(release_manifest, dict) else {})
+    release_manifest = release_manifest if isinstance(release_manifest, dict) else {}
+    release = evaluate_release(release_manifest)
+    ledger_assets = bundle.get("rights_ledger", {}).get("assets", []) if isinstance(bundle.get("rights_ledger"), dict) else []
+    manifest_assets = release_manifest.get("assets", [])
+    ledger_ids = {asset.get("asset_id") for asset in ledger_assets if isinstance(asset, dict) and isinstance(asset.get("asset_id"), str)}
+    manifest_ids = {asset.get("asset_id") for asset in manifest_assets if isinstance(asset, dict) and isinstance(asset.get("asset_id"), str)} if isinstance(manifest_assets, list) else set()
+    asset_ledger_consistent = bool(ledger_ids) and ledger_ids == manifest_ids
     checks = {
         "research": research.get("structurally_reviewable") is True,
         "script": script.get("structurally_valid") is True and script.get("editorially_approved") is True,
         "rights": rights.get("passed") is True,
+        "asset_ledger_consistent": asset_ledger_consistent,
         "media": media.get("passed") is True,
         "release_gates": release.get("release_ready_for_private_review") is True,
     }
+    if not asset_ledger_consistent:
+        blockers_asset_consistency = ["asset IDs in release_manifest.assets must exactly match rights_ledger.assets"]
+    else:
+        blockers_asset_consistency = []
     blockers: list[str] = []
     for name, report in (("research", research), ("script", script), ("rights", rights), ("media", media)):
         for item in report.get("blockers", []):
             blockers.append(f"{name}: {item}")
+    blockers.extend(f"asset_ledger_consistency: {item}" for item in blockers_asset_consistency)
     blockers.extend(f"release_manifest: {item}" for item in release.get("blockers", []))
     ready = all(checks.values())
     return {
