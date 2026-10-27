@@ -95,7 +95,7 @@ jobs:
           Path("out").mkdir(exist_ok=True)
           PY
           curl --fail --location --retry 2 --proto '=https' --proto-redir '=https' --tlsv1.2 "$MODEL_URL" --output out/voice.onnx
-          curl --fail --location --retry 2 --proto '=https' --tlsv1.2 "$VOICE_CONFIG_URL" --output out/voice.onnx.json
+          curl --fail --location --retry 2 --proto '=https' --proto-redir '=https' --tlsv1.2 "$VOICE_CONFIG_URL" --output out/voice.onnx.json
           python - <<'PY'
           import hashlib, os
           from pathlib import Path
