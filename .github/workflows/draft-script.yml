@@ -1,0 +1,94 @@
+name: Draft script (manual, Gemini opt-in)
+
+on:
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: Documentary topic
+        required: true
+        type: string
+      research_packet_json:
+        description: JSON research packet; claims must remain unverified until human review
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  draft:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install package
+        run: python -m pip install -e .
+      - name: Write research packet
+        env:
+          RESEARCH_PACKET_JSON: ${{ inputs.research_packet_json }}
+        run: |
+          python - <<'PY'
+          import json, os
+          packet = json.loads(os.environ["RESEARCH_PACKET_JSON"])
+          if not isinstance(packet, dict):
+              raise SystemExit("Research packet root must be a JSON object")
+          with open("research-packet.json", "w", encoding="utf-8") as f:
+              json.dump(packet, f, ensure_ascii=False, indent=2)
+          PY
+      - name: Draft script (requires explicit free-tier confirmation)
+        env:
+          TOPIC: ${{ inputs.topic }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          BTM_ENABLE_CLOUD_AI: "1"
+          BTM_GEMINI_FREE_TIER_CONFIRMED: ${{ vars.BTM_GEMINI_FREE_TIER_CONFIRMED }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+        run: |
+          if [ "$BTM_GEMINI_FREE_TIER_CONFIRMED" != "1" ]; then
+            echo "Blocked: set repository variable BTM_GEMINI_FREE_TIER_CONFIRMED=1 only after checking the account's current free-tier, quota, and billing settings."
+            exit 1
+          fi
+          btm-draft-script "$TOPIC" research-packet.json script-draft.json
+      - name: Upload draft artifact (not a YouTube upload)
+        uses: actions/upload-artifact@v4
+        with:
+          name: beyond-the-machine-script-draft
+          path: script-draft.json
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Optional Telegram notification (not an approval gate)
+        if: ${{ vars.BTM_TELEGRAM_NOTIFICATIONS_ENABLED == '1' }}
+        continue-on-error: true
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python - <<'PY'
+          import json, os, urllib.parse, urllib.request
+          token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
+          chat_id = os.environ.get("TELEGRAM_CHAT_ID", "").strip()
+          if not token or not chat_id:
+              print("Telegram notification skipped: bot token or chat ID is not configured.")
+              raise SystemExit(0)
+          payload = urllib.parse.urlencode({
+              "chat_id": chat_id,
+              "text": "Beyond the Machine: a script draft artifact is ready for human review. No video was uploaded or published."
+          }).encode()
+          request = urllib.request.Request(
+              "https://api.telegram.org/bot" + token + "/sendMessage",
+              data=payload,
+              headers={"Content-Type": "application/x-www-form-urlencoded"},
+              method="POST",
+          )
+          try:
+              with urllib.request.urlopen(request, timeout=15) as response:
+                  if response.status < 200 or response.status >= 300:
+                      print("Telegram notification did not succeed.")
+          except Exception:
+              print("Telegram notification failed; the draft artifact remains available.")
+          PY

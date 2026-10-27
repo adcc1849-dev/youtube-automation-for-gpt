@@ -1,0 +1,31 @@
+{
+  "metadata": {
+    "title": "How Humanoid Robots Are Learning to Work in Factories",
+    "description": "A sample manifest only. This is not a researched or publishable video.",
+    "language": "en-US"
+  },
+  "claims": [
+    {
+      "claim": "Replace this placeholder with a specific, checkable factual claim.",
+      "status": "unverified",
+      "sources": []
+    }
+  ],
+  "assets": [],
+  "technical": {
+    "render_exists": false,
+    "duration_valid": false,
+    "audio_valid": false,
+    "video_stream_valid": false
+  },
+  "security": {
+    "secret_scan_passed": false,
+    "no_unapproved_paid_services": true,
+    "no_public_upload_attempt": true
+  },
+  "policy": {
+    "staged_private_tests_passed": false,
+    "owner_public_activation_authorized": false,
+    "public_publishing_enabled": false
+  }
+}

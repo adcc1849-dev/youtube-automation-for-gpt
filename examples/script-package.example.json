@@ -1,0 +1,29 @@
+{
+  "title": "How Humanoid Robots Are Learning to Work in Factories",
+  "audience": "US English-speaking general audience",
+  "editorial_angle": "Current capabilities, hard limitations, and realistic near-term implications",
+  "language": "en-US",
+  "target_runtime_minutes": 10,
+  "minimum_word_count": 1200,
+  "maximum_word_count": 1800,
+  "editorial_status": "draft",
+  "sections": [
+    {
+      "heading": "Cold open",
+      "narration": "PLACEHOLDER: replace with original narration and source-linked factual claims.",
+      "claim_ids": [],
+      "visual_notes": "Use only assets with cleared rights-ledger IDs."
+    },
+    {
+      "heading": "What works today",
+      "narration": "PLACEHOLDER: describe verified capabilities and cite claim IDs in the production notes.",
+      "claim_ids": []
+    },
+    {
+      "heading": "What still fails and what comes next",
+      "narration": "PLACEHOLDER: distinguish demonstrated results from predictions and close with a useful takeaway.",
+      "claim_ids": []
+    }
+  ],
+  "_note": "Schema example only. Placeholder narration intentionally fails word-count validation and is not a publishable script."
+}

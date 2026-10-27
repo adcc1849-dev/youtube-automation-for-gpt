@@ -1,0 +1,28 @@
+{
+  "ledger_version": "1.0",
+  "assets": [
+    {
+      "asset_id": "example-original-001",
+      "kind": "original",
+      "description": "A factory diagram created for this episode",
+      "source_url": "https://example.org/project/factory-diagram",
+      "captured_at": "2026-10-27",
+      "rights_status": "reviewed",
+      "license_family": "original",
+      "license_name": "Created in-house; ownership and contributor agreement reviewed",
+      "license_url": "https://example.org/project/rights-policy",
+      "proof_url": "https://example.org/project/evidence/diagram-001",
+      "intended_use": "Edited documentary video and thumbnail",
+      "reviewed_by": "human-reviewer",
+      "reviewed_at": "2026-10-27",
+      "commercial_use_allowed": true,
+      "modification_allowed": true,
+      "attribution_required": false,
+      "attribution_text": "",
+      "creator": "Production team",
+      "rights_reviewed": true,
+      "restricted_or_unclear": false
+    }
+  ],
+  "_note": "Illustrative schema only. example.org URLs are placeholders, not evidence; this example must not be treated as a real cleared asset."
+}
