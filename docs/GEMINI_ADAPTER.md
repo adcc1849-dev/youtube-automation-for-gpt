@@ -20,7 +20,7 @@ The result contains a draft package and a validation report. It never authorizes
 
 `.github/workflows/draft-script.yml` is manual-only (`workflow_dispatch`) and does not publish. To use it, the repository owner must first review current Google AI account terms and billing status, then configure a `GEMINI_API_KEY` Actions secret. The workflow requires the repository variable `BTM_GEMINI_FREE_TIER_CONFIRMED=1`; without it, the run stops before calling the provider. Optionally set `GEMINI_MODEL` as a repository variable. The workflow stores only the draft JSON as a short-retention Actions artifact.
 
-This flag does not prove Google will treat the call as free. If cost or quota cannot be confirmed, do not set the variable or run the workflow. The workflow is never scheduled and contains no YouTube upload code.
+This flag does not prove Google will treat the call as free. If cost or quota cannot be confirmed, do not set the variable or run the workflow. The workflow is never scheduled and contains no YouTube upload code. Optional Telegram notifications are off unless the owner sets `BTM_TELEGRAM_NOTIFICATIONS_ENABLED=1` and configures `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` secrets. The notification only says a draft artifact is ready; it is not an approval gate, does not expose the topic, and notification failure does not block the draft.
 
 ## Limits
 

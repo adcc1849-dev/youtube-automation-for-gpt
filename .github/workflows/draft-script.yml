@@ -60,3 +60,35 @@ jobs:
           path: script-draft.json
           if-no-files-found: error
           retention-days: 7
+
+      - name: Optional Telegram notification (not an approval gate)
+        if: ${{ vars.BTM_TELEGRAM_NOTIFICATIONS_ENABLED == '1' }}
+        continue-on-error: true
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python - <<'PY'
+          import json, os, urllib.parse, urllib.request
+          token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
+          chat_id = os.environ.get("TELEGRAM_CHAT_ID", "").strip()
+          if not token or not chat_id:
+              print("Telegram notification skipped: bot token or chat ID is not configured.")
+              raise SystemExit(0)
+          payload = urllib.parse.urlencode({
+              "chat_id": chat_id,
+              "text": "Beyond the Machine: a script draft artifact is ready for human review. No video was uploaded or published."
+          }).encode()
+          request = urllib.request.Request(
+              "https://api.telegram.org/bot" + token + "/sendMessage",
+              data=payload,
+              headers={"Content-Type": "application/x-www-form-urlencoded"},
+              method="POST",
+          )
+          try:
+              with urllib.request.urlopen(request, timeout=15) as response:
+                  if response.status < 200 or response.status >= 300:
+                      print("Telegram notification did not succeed.")
+          except Exception:
+              print("Telegram notification failed; the draft artifact remains available.")
+          PY
