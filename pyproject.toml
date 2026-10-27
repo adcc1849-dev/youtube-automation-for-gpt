@@ -16,6 +16,7 @@ test = ["pytest>=8,<9"]
 
 [project.scripts]
 btm-validate = "btm_pipeline.cli:main"
+btm-inspect-media = "btm_pipeline.media_cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

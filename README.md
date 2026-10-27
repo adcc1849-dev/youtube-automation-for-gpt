@@ -35,6 +35,7 @@ On Android/Termux, use Termux's available Python and create the virtual environm
 - [Asset rights and provenance](docs/ASSET_RIGHTS.md)
 - [Script workflow](docs/SCRIPT_WORKFLOW.md)
 - [Optional Gemini draft adapter](docs/GEMINI_ADAPTER.md)
+- [Local media technical inspection](docs/MEDIA_QC.md)
 - [Publishing policy](config/publishing-policy.json)
 
 ## Planned stages
@@ -43,7 +44,7 @@ On Android/Termux, use Termux's available Python and create the virtual environm
 2. Source-backed research packet and claim-evidence ledger (current milestone).
 3. Rights ledger and asset provenance (validator implemented).
 4. Script package validation and an opt-in Gemini draft adapter (both implemented; provider calls remain disabled by default).
-5. Narration and editing/rendering adapters.
+5. Narration and editing/rendering adapters (local technical inspection implemented; rendering itself remains future work).
 6. Technical, metadata, factual, rights, and security gates.
 7. Staged private end-to-end testing.
 8. Public publishing only after safeguards and explicit owner activation.
