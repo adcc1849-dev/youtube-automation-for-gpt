@@ -185,6 +185,7 @@ jobs:
             out/production-report.json
             out/episode.mp4
             out/episode.narration.wav
+            out/upload-receipt.json
           if-no-files-found: warn
           retention-days: 7
 
@@ -194,6 +195,6 @@ jobs:
           echo "Production did not pass. Review the production report artifact; publishing was not attempted."
           exit 1
 
-      - name: Confirm publishing remains disabled
+      - name: Confirm publication mode and policy
         if: always()
-        run: echo "This workflow only renders and uploads a private GitHub Actions artifact. It never uploads or publishes to YouTube."
+        run: echo "YouTube upload is opt-in per run. Public visibility remains blocked unless the repository publishing policy has explicit owner activation and staged private tests are recorded."
