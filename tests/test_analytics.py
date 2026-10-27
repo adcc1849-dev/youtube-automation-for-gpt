@@ -6,7 +6,7 @@ from btm_pipeline.analytics import AnalyticsError, collect_snapshot, date_window
 
 def test_date_windows_are_explicit_and_comparable():
     windows = date_windows("2026-10-28")
-    assert windows["1d"] == ("2026-10-27", "2026-10-28")
+    assert windows["1d"] == ("2026-10-28", "2026-10-28")
     assert windows["7d"] == ("2026-10-22", "2026-10-28")
     assert windows["28d"] == ("2026-10-01", "2026-10-28")
 
