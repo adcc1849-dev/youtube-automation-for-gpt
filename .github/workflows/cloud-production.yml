@@ -1,0 +1,154 @@
+name: Cloud video production (manual, no publishing)
+
+on:
+  workflow_dispatch:
+    inputs:
+      config_path:
+        description: "Repository-relative production JSON config with approved script, assets, and rights ledgers"
+        required: true
+        type: string
+      voice_model_url:
+        description: "HTTPS URL for the Piper .onnx model whose terms you have reviewed"
+        required: true
+        type: string
+      voice_model_sha256:
+        description: "Expected SHA-256 of the exact .onnx model file"
+        required: true
+        type: string
+      voice_config_url:
+        description: "HTTPS URL for the matching Piper .onnx.json sidecar"
+        required: true
+        type: string
+      voice_config_sha256:
+        description: "Expected SHA-256 of the exact .onnx.json sidecar"
+        required: true
+        type: string
+      voice_license_reviewed:
+        description: "Confirm the voice/model license was checked for this intended use"
+        required: true
+        type: choice
+        options:
+          - "no"
+          - "yes"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloud-production-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  render:
+    if: ${{ inputs.voice_license_reviewed == 'yes' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Checkout selected branch
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends ffmpeg
+
+      - name: Install production package and Piper
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .
+          python -m pip install piper-tts
+
+      - name: Validate inputs and download pinned voice files
+        env:
+          CONFIG_PATH: ${{ inputs.config_path }}
+          MODEL_URL: ${{ inputs.voice_model_url }}
+          MODEL_SHA256: ${{ inputs.voice_model_sha256 }}
+          VOICE_CONFIG_URL: ${{ inputs.voice_config_url }}
+          VOICE_CONFIG_SHA256: ${{ inputs.voice_config_sha256 }}
+        run: |
+          python - <<'PY'
+          import os, re
+          from pathlib import Path
+          from urllib.parse import urlparse
+
+          config = Path(os.environ["CONFIG_PATH"])
+          if not config.is_file() or config.suffix.lower() != ".json":
+              raise SystemExit("config_path must identify an existing repository JSON file")
+          for name in ("MODEL_URL", "VOICE_CONFIG_URL"):
+              url = os.environ[name]
+              if urlparse(url).scheme != "https" or not urlparse(url).netloc:
+                  raise SystemExit(f"{name} must be a valid HTTPS URL")
+          for name in ("MODEL_SHA256", "VOICE_CONFIG_SHA256"):
+              if not re.fullmatch(r"[0-9a-fA-F]{64}", os.environ[name]):
+                  raise SystemExit(f"{name} must be a 64-character SHA-256 hex digest")
+          Path("out").mkdir(exist_ok=True)
+          PY
+          curl --fail --location --retry 2 --proto '=https' --tlsv1.2 "$MODEL_URL" --output out/voice.onnx
+          curl --fail --location --retry 2 --proto '=https' --tlsv1.2 "$VOICE_CONFIG_URL" --output out/voice.onnx.json
+          python - <<'PY'
+          import hashlib, os
+          from pathlib import Path
+          checks = [
+              ("out/voice.onnx", os.environ["MODEL_SHA256"]),
+              ("out/voice.onnx.json", os.environ["VOICE_CONFIG_SHA256"]),
+          ]
+          for name, expected in checks:
+              actual = hashlib.sha256(Path(name).read_bytes()).hexdigest()
+              if actual.lower() != expected.lower():
+                  raise SystemExit(f"SHA-256 mismatch for {name}; stopping production")
+          print("Voice model and sidecar SHA-256 checks passed.")
+          PY
+
+      - name: Prepare runner-specific config
+        env:
+          CONFIG_PATH: ${{ inputs.config_path }}
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          source = Path(os.environ["CONFIG_PATH"])
+          config = json.loads(source.read_text(encoding="utf-8"))
+          if not isinstance(config, dict):
+              raise SystemExit("Production config root must be a JSON object")
+          config["piper_model_path"] = "out/voice.onnx"
+          config["output_path"] = "out/episode.mp4"
+          config["report_path"] = "out/production-report.json"
+          Path("out/runtime-config.json").write_text(json.dumps(config, indent=2) + "\n", encoding="utf-8")
+          PY
+
+      - name: Run complete production pipeline
+        id: production
+        run: |
+          set +e
+          btm-produce out/runtime-config.json out/production-report.json
+          status=$?
+          echo "exit_code=$status" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Upload private-run artifacts for owner review
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: beyond-the-machine-production-${{ github.run_id }}
+          path: |
+            out/production-report.json
+            out/episode.mp4
+            out/episode.narration.wav
+          if-no-files-found: warn
+          retention-days: 7
+
+      - name: Fail the workflow if production or technical QC failed
+        if: always() && steps.production.outputs.exit_code != '0'
+        run: |
+          echo "Production did not pass. Review the production report artifact; publishing was not attempted."
+          exit 1
+
+      - name: Confirm publishing remains disabled
+        if: always()
+        run: echo "This workflow only renders and uploads a private GitHub Actions artifact. It never uploads or publishes to YouTube."
