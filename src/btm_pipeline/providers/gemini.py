@@ -36,7 +36,7 @@ def _require_opt_in() -> tuple[str, str]:
     api_key = os.environ.get("GEMINI_API_KEY", "").strip()
     if not api_key:
         raise GeminiConfigurationError("GEMINI_API_KEY is missing; provide it through secret/environment configuration, never source code.")
-    model = os.environ.get("GEMINI_MODEL", "gemini-3.6-flash").strip()
+    model = os.environ.get("GEMINI_MODEL", "").strip() or "gemini-3.6-flash"
     if not _MODEL_RE.fullmatch(model):
         raise GeminiConfigurationError("GEMINI_MODEL contains invalid characters.")
     return api_key, model
