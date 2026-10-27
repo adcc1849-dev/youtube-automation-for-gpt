@@ -125,7 +125,9 @@ def evaluate_release(manifest: dict[str, Any]) -> dict[str, Any]:
     mandatory_pass = all(gate.passed for gate in gates if gate.mandatory)
     # This field means gates are ready for private review, not ready for public release.
     review_ready = mandatory_pass and policy_present
-    public_publish_allowed = review_ready and private_tests_passed and activation_authorized and public_enabled
+    # Public activation is deliberately out of scope for this version. Manifest fields
+    # are user-supplied data and must never be able to override repository policy.
+    public_publish_allowed = False
     blockers = [f"{gate.name}: {'; '.join(gate.details)}" for gate in gates if gate.mandatory and not gate.passed]
     if not policy_present:
         blockers.append("policy object is missing or invalid")
@@ -135,6 +137,7 @@ def evaluate_release(manifest: dict[str, Any]) -> dict[str, Any]:
         blockers.append("explicit owner authorization for public publishing is absent")
     if not public_enabled:
         blockers.append("public publishing is disabled by policy")
+    blockers.append("public publishing is hard-disabled in this version; manifest flags cannot enable it")
 
     return {
         "release_ready_for_private_review": review_ready,
