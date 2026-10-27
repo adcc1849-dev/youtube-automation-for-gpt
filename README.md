@@ -38,6 +38,7 @@ On Android/Termux, use Termux's available Python and create the virtual environm
 - [Local media technical inspection](docs/MEDIA_QC.md)
 - [Bundle preflight orchestration](docs/REVIEW_BUNDLE.md)
 - [Local FFmpeg renderer](docs/LOCAL_RENDER.md)
+- [11-skill integration](docs/SKILLS.md)
 - [Publishing policy](config/publishing-policy.json)
 
 ## Planned stages
