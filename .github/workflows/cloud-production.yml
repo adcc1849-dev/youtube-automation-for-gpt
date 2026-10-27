@@ -40,10 +40,15 @@ concurrency:
 
 jobs:
   render:
-    if: ${{ inputs.voice_license_reviewed == 'yes' }}
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
+      - name: Fail unless voice license review is explicitly confirmed
+        if: ${{ inputs.voice_license_reviewed != 'yes' }}
+        run: |
+          echo "Voice/model license review was not confirmed. Production is blocked; no model download or render was attempted."
+          exit 1
+
       - name: Checkout selected branch
         uses: actions/checkout@v6
 
@@ -89,7 +94,7 @@ jobs:
                   raise SystemExit(f"{name} must be a 64-character SHA-256 hex digest")
           Path("out").mkdir(exist_ok=True)
           PY
-          curl --fail --location --retry 2 --proto '=https' --tlsv1.2 "$MODEL_URL" --output out/voice.onnx
+          curl --fail --location --retry 2 --proto '=https' --proto-redir '=https' --tlsv1.2 "$MODEL_URL" --output out/voice.onnx
           curl --fail --location --retry 2 --proto '=https' --tlsv1.2 "$VOICE_CONFIG_URL" --output out/voice.onnx.json
           python - <<'PY'
           import hashlib, os
