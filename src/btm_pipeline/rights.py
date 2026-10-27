@@ -85,6 +85,12 @@ def validate_asset_rights_ledger(ledger: Any) -> dict[str, Any]:
         family = asset.get("license_family")
         if family not in LICENSE_FAMILIES or family in {"unknown"}:
             blockers.append(f"{label}: license_family is unknown or unsupported")
+        # Reject license families whose standard terms conflict with monetized,
+        # edited documentary use even if contradictory booleans were supplied.
+        if family in {"cc_by_nc", "cc_by_nc_sa", "cc_by_nc_nd"}:
+            blockers.append(f"{label}: non-commercial Creative Commons license is incompatible with this channel's commercial-use requirement")
+        if family in {"cc_by_nd", "cc_by_nc_nd"}:
+            blockers.append(f"{label}: no-derivatives Creative Commons license is incompatible with an edited video workflow")
         if asset.get("commercial_use_allowed") is not True:
             blockers.append(f"{label}: commercial_use_allowed must be explicitly true for this channel")
         if asset.get("modification_allowed") is not True:
