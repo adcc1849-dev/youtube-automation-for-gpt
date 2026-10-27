@@ -78,7 +78,7 @@ def test_missing_technical_results_blocks_release():
     assert report["release_ready_for_private_review"] is False
 
 
-def test_public_publish_requires_all_three_policy_conditions():
+def test_manifest_flags_can_never_enable_public_publishing_without_an_uploader():
     manifest = valid_manifest()
     manifest["policy"].update({
         "staged_private_tests_passed": True,
@@ -87,7 +87,7 @@ def test_public_publish_requires_all_three_policy_conditions():
     })
     report = evaluate_release(manifest)
     assert report["release_ready_for_private_review"] is True
-    assert report["public_publish_allowed"] is True
+    assert report["public_publish_allowed"] is False
 
 
 def test_owner_authorization_alone_cannot_bypass_failed_gate():
