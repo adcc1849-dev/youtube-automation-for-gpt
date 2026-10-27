@@ -52,7 +52,7 @@ def date_windows(end_date: str) -> dict[str, tuple[str, str]]:
     except ValueError:
         raise AnalyticsError("end_date must be an ISO date (YYYY-MM-DD)") from None
     return {
-        "1d": ((end - timedelta(days=1)).isoformat(), end.isoformat()),
+        "1d": (end.isoformat(), end.isoformat()),
         "7d": ((end - timedelta(days=6)).isoformat(), end.isoformat()),
         "28d": ((end - timedelta(days=27)).isoformat(), end.isoformat()),
     }
