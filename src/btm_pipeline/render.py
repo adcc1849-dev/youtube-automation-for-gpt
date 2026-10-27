@@ -65,14 +65,14 @@ def render_documentary(
         if music_id not in asset_ids:
             raise RenderError("music_asset_id is not in the cleared rights ledger")
 
-    executable = shutil.which(ffmpeg_binary)
-    if executable is None:
-        raise RenderError(f"{ffmpeg_binary} executable was not found; install FFmpeg locally")
     output = Path(output_path).expanduser()
     if output.exists() and not overwrite:
         raise RenderError("output already exists; pass overwrite=True only when replacement is intentional")
     if output.suffix.lower() not in {".mp4", ".mkv", ".mov"}:
         raise RenderError("output extension must be .mp4, .mkv, or .mov")
+    executable = shutil.which(ffmpeg_binary)
+    if executable is None:
+        raise RenderError(f"{ffmpeg_binary} executable was not found; install FFmpeg locally")
     output.parent.mkdir(parents=True, exist_ok=True)
 
     command = [executable, "-hide_banner", "-loglevel", "error", "-y" if overwrite else "-n"]
