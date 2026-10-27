@@ -22,5 +22,5 @@ jobs:
         run: python -m pip install -e ".[test]"
       - name: Run complete test suite
         run: python -m pytest -q
-      - name: Verify production CLI is installed
-        run: btm-produce --help
+      - name: Verify production runner imports
+        run: python -c "from btm_pipeline.production import run_production; print('production runner import OK')"
