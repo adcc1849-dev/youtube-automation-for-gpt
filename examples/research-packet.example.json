@@ -1,0 +1,31 @@
+{
+  "topic": "How humanoid robots are learning to work in factories",
+  "research_date": "2026-10-27",
+  "sources": [
+    {
+      "source_id": "src-001",
+      "url": "https://www.nist.gov/",
+      "title": "Replace with the exact page or document title",
+      "publisher": "National Institute of Standards and Technology",
+      "published_at": "2026-01-01",
+      "accessed_at": "2026-10-27",
+      "source_type": "official_documentation",
+      "relevance": "Explain exactly why this source matters to the topic.",
+      "supports": ["claim-001"]
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "claim-001",
+      "text": "Replace with one specific, checkable factual statement.",
+      "status": "unverified",
+      "source_ids": ["src-001"],
+      "notes": "Do not mark verified until the source is opened and the evidence directly supports the wording."
+    }
+  ],
+  "open_questions": [
+    "What evidence is still missing?",
+    "Is this information current enough for the intended video?"
+  ],
+  "researcher_notes": "Example template only. It contains no researched or verified claims."
+}
