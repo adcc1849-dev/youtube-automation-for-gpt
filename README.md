@@ -4,7 +4,7 @@ A free-first, hybrid open-source + cloud-AI production system for faceless AI an
 
 ## Current status
 
-**Core components implemented; end-to-end production is not yet complete.** The repository now includes release gates, research and rights ledgers, script validation, opt-in Gemini drafting, all 11 skill prompts, offline Piper TTS, a local FFmpeg still-image renderer, technical QC, and bundle preflight. Staged private YouTube testing and a complete captions/advanced-editing workflow remain unfinished.
+**Core components implemented; end-to-end production is not yet complete.** The repository now includes release gates, research and rights ledgers, script validation, opt-in Gemini drafting, all 11 skill prompts with a guarded runner, offline Piper TTS, a local FFmpeg still-image renderer, technical QC, and bundle preflight. Staged private YouTube testing and a complete captions/advanced-editing workflow remain unfinished.
 
 - Public publishing is **disabled by default**.
 - No paid APIs, subscriptions, or spend are enabled.

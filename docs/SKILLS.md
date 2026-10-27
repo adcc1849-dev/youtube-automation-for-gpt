@@ -20,7 +20,7 @@ The repository vendors the MIT-licensed `Jakeschincariol/youtube-agent-skill` so
 
 `available_skills()` returns the catalog. `load_skill(name, available_inputs=...)` refuses to mark a skill ready when required inputs are missing. It returns the upstream `SKILL.md` text only; it does not execute helper scripts. Helper scripts must be separately audited and explicitly integrated before use. No comments, analytics, transcripts, or other unavailable data may be invented.
 
-The Gemini adapter's script prompt will include the `yt-script` guidance while still enforcing the repository's source-linked and human-review boundaries. Other skills can be loaded by future stage adapters once their real inputs are supplied.
+The Gemini script-draft adapter includes `yt-script` guidance. The generic `btm-run-skill SKILL_NAME INPUTS.json [OUTPUT.json]` CLI can invoke any registered skill when its required inputs are supplied; it is manual and opt-in, requires the same Gemini flags/key, and marks results for human review. No skill is auto-run on a schedule.
 
 ## Attribution
 
