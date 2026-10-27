@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: ["main", "feat/**"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Python tests (${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - name: Install package and test dependencies
+        run: python -m pip install -e ".[test]"
+      - name: Run tests
+        run: python -m pytest -q
+      - name: Validate sample manifest (expected to block)
+        run: |
+          set +e
+          btm-validate examples/demo_manifest.json
+          result=$?
+          set -e
+          if [ "$result" -eq 0 ]; then
+            echo "Unsafe: placeholder manifest unexpectedly passed."
+            exit 1
+          fi
+          if [ "$result" -ne 1 ]; then
+            echo "Validator errored instead of returning a policy block (exit $result)."
+            exit 1
+          fi

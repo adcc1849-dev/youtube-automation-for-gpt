@@ -1,0 +1,20 @@
+{
+  "project": "Beyond the Machine",
+  "version": "3.0",
+  "operating_mode": "free_first_hybrid",
+  "paid_services_allowed": false,
+  "public_publishing_enabled": false,
+  "owner_public_activation_authorized": false,
+  "staged_private_end_to_end_tests_required": true,
+  "fail_closed_on_mandatory_checks": true,
+  "mandatory_gates": [
+    "factual_evidence",
+    "asset_rights",
+    "technical",
+    "metadata",
+    "security"
+  ],
+  "telegram_notifications_enabled": false,
+  "telegram_is_publishing_gate": false,
+  "secrets_must_not_be_committed": true
+}
