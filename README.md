@@ -34,7 +34,7 @@ On Android/Termux, use Termux's available Python and create the virtual environm
 - [Research workflow](docs/RESEARCH.md)
 - [Asset rights and provenance](docs/ASSET_RIGHTS.md)
 - [Script workflow](docs/SCRIPT_WORKFLOW.md)
-- [Optional Gemini draft adapter](docs/GEMINI_ADAPTER.md)
+- [Optional Gemini draft adapter](docs/GEMINI_ADAPTER.md) (manual-only GitHub Actions workflow)
 - [Local media technical inspection](docs/MEDIA_QC.md)
 - [Bundle preflight orchestration](docs/REVIEW_BUNDLE.md)
 - [Local FFmpeg renderer](docs/LOCAL_RENDER.md)

@@ -1,6 +1,6 @@
 # Optional Gemini draft adapter
 
-The provider adapter is disabled by default. It uses Python's standard library and makes no request unless all of the following are explicitly set in the process environment:
+The provider adapter is disabled by default in local use. It uses Python's standard library and makes no request unless all of the following are explicitly set in the process environment:
 
 - `BTM_ENABLE_CLOUD_AI=1`
 - `BTM_GEMINI_FREE_TIER_CONFIRMED=1` after the owner checks the current account terms, model availability, quota, and billing settings
@@ -8,14 +8,23 @@ The provider adapter is disabled by default. It uses Python's standard library a
 
 Optional: `GEMINI_MODEL` selects a model ID; default is `gemini-3.6-flash`. Model availability may vary by account/region and can change. A free-tier confirmation flag is a human assertion, not an API guarantee. If the account's free-tier status or billing implications are uncertain, do not enable the adapter.
 
-## Example
+## Local CLI
 
-Load a research packet from a local file and call `draft_script(topic, packet)` from Python. The result contains the draft package and a validation report. It never authorizes production, uploads, or publishing. Keep API keys in environment/secret storage; do not commit them or paste them into source files.
+```sh
+btm-draft-script "How humanoid robots work in factories" research-packet.json script-draft.json
+```
+
+The result contains a draft package and a validation report. It never authorizes production, uploads, or publishing.
+
+## Optional GitHub Actions workflow
+
+`.github/workflows/draft-script.yml` is manual-only (`workflow_dispatch`) and does not publish. To use it, the repository owner must first review current Google AI account terms and billing status, then configure a `GEMINI_API_KEY` Actions secret. The workflow requires the repository variable `BTM_GEMINI_FREE_TIER_CONFIRMED=1`; without it, the run stops before calling the provider. Optionally set `GEMINI_MODEL` as a repository variable. The workflow stores only the draft JSON as a short-retention Actions artifact.
+
+This flag does not prove Google will treat the call as free. If cost or quota cannot be confirmed, do not set the variable or run the workflow. The workflow is never scheduled and contains no YouTube upload code.
 
 ## Limits
 
 - The adapter sends the supplied topic and research packet to Google; do not include confidential or sensitive material.
 - Model output is untrusted draft text and may contain errors or unsupported claims.
-- The validator flags cited claims that are not marked `human_verified`; this status must be set by a human after source review.
+- The `yt-script` skill is guidance, not evidence. The validator flags cited claims that are not marked `human_verified`; that status must be set by a human after source review.
 - No source browsing, fact-checking, rights clearance, narration, rendering, upload, or public publishing is performed.
-- API availability and provider terms are not guaranteed by this repository. The adapter must remain off if the free/approved-cost boundary cannot be confirmed.
