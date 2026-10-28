@@ -115,6 +115,7 @@ def call_model(task: str, context: str) -> dict:
     payload = json.dumps({
         "model": model,
         "temperature": 0.1,
+        "max_tokens": 8000,
         "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
     }).encode("utf-8")
     request = urllib.request.Request(
