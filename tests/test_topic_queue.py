@@ -60,3 +60,19 @@ def test_rank_file_preserves_output_history(tmp_path):
     assert json.loads(output.read_text())["next_topic"] == "Factory robots"
     with pytest.raises(TopicQueueError, match="already exists"):
         rank_file(source, output)
+
+
+@pytest.mark.parametrize("invalid", [None, {}, "", [1], [""]])
+def test_completed_topics_must_always_be_a_list_of_nonempty_strings(tmp_path, invalid):
+    source = tmp_path / "candidates.json"
+    output = tmp_path / "ranked.json"
+    completed_path = tmp_path / "completed.json"
+    source.write_text(json.dumps([candidate()]), encoding="utf-8")
+    completed_path.write_text(json.dumps(invalid), encoding="utf-8")
+    with pytest.raises(TopicQueueError, match="completed topics"):
+        rank_file(source, output, completed_topics_path=completed_path)
+
+
+def test_completed_topics_validation_also_applies_to_direct_api():
+    with pytest.raises(TopicQueueError, match="completed topics"):
+        rank_candidates([candidate()], completed_topics={})
