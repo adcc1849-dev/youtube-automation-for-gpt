@@ -22,7 +22,7 @@
 | Topic and structure | PASS — draft scope | Production brief and script are present. |
 | Primary-source check | ASSISTANT-CHECKED | `SOURCE_AUDIT.md`; sources are company reports and do not independently audit company metrics. |
 | Independent context | ADDED, EDITOR REVIEW PENDING | Stanford HAI AI Index 2026; NIOSH workplace robotics safety context. |
-| Claim IDs and tense | NEEDS FINAL CONSISTENCY REVIEW | Confirm R1–R5 labels match between script and research draft. |
+| Claim IDs and tense | NEEDS FINAL CONSISTENCY REVIEW | Script and research claim IDs now normalized to R1–R5 in the same order; retain final human editorial review. |
 | Final narration script | BLOCKED | Script is not owner/editor-approved; factual sentences need a final claim-by-claim review. |
 | Visual/audio asset rights | BLOCKED | Ledger is a template; no final asset files or complete license proofs are recorded. |
 | Voice model and license | BLOCKED | Exact Piper model/sidecar, license, URLs, hashes, and permitted-use review are not recorded. |
@@ -57,12 +57,11 @@ Illustrative visuals, if used, will be identified as illustrations rather than d
 
 ## Next actions
 
-1. Review and normalize R1–R5 mapping in the script and research draft.
-2. Finalize the narration script with claim references and no stale verification labels.
-3. Select actual visuals and record complete asset provenance and rights evidence.
-4. Select a voice model and verify its exact license, sidecar, and hashes.
-5. Create `config/episode-01.json` using the real cleared assets and ledgers.
-6. Run the release-gate validator and address every blocker before dispatching a render.
-7. Render in GitHub Actions only after the inputs are complete; inspect the video, audio, captions, and technical report.
+1. Complete owner/editor claim-by-claim review and approve the narration script; source-checked is not the same as independently verified.
+2. Select actual visuals and record complete asset provenance and rights evidence for every file.
+3. Select a voice model and verify its exact license, sidecar, URLs, and hashes.
+4. Create `config/episode-01.json` using only real cleared assets and verified voice inputs.
+5. Run the release-gate validator and address every blocker before dispatching a render.
+6. Render in GitHub Actions only after the inputs are complete; inspect the video, audio, captions, and technical report.
 
 **Important:** `source_checked` means the assistant compared wording with sources. It does not mean an owner/editor has approved the claim, nor does it prove the company's metrics independently. Do not change statuses to `verified` merely to satisfy a software gate.
