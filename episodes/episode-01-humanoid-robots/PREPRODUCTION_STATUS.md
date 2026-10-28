@@ -13,7 +13,7 @@
 - Script claim IDs are intended to map as R1 Spartanburg operating metrics, R2 reported Spartanburg safety arrangements, R3 Leipzig/AEON pilot, R4 Digit warehouse logistics, and R5 planned GXO expansion.
 - Independent context sources added: Stanford HAI AI Index 2026 and the US NIOSH Center for Occupational Robotics Research.
 - Asset rights ledger template added.
-- Visual storyboard draft added with ten planned scenes, claim-linked visual notes, and an explicit original/illustrative asset policy.
+- Visual storyboard added and ten original SVG draft assets created (`assets/vis-001.svg` through `assets/vis-010.svg`). They remain pending owner/factual/rights review and conversion to PNG; see `ASSET_MANIFEST_DRAFT.json` and `RIGHTS_LEDGER_DRAFT.json`.
 - Draft remains unmerged; no render or upload was triggered.
 
 ## Mandatory gate status
@@ -25,7 +25,7 @@
 | Independent context | ADDED, EDITOR REVIEW PENDING | Stanford HAI AI Index 2026; NIOSH workplace robotics safety context. |
 | Claim IDs and tense | NEEDS FINAL CONSISTENCY REVIEW | Script and research claim IDs now normalized to R1–R5 in the same order; retain final human editorial review. |
 | Final narration script | BLOCKED | Script is not owner/editor-approved; factual sentences need a final claim-by-claim review. |
-| Visual/audio asset rights | BLOCKED | Storyboard is drafted; ledger remains a template, with no final asset files or complete license proofs recorded. |
+| Visual/audio asset rights | BLOCKED — assets drafted | Ten original SVGs exist; no PNG conversions, owner rights review, SHA-256 hashes, or final clearances yet. Audio/voice rights remain unresolved. |
 | Voice model and license | BLOCKED | Exact Piper model/sidecar, license, URLs, hashes, and permitted-use review are not recorded. |
 | Final title/description | DRAFT ONLY | Use provisional metadata below; finalize after script approval. |
 | Captions | BLOCKED | Captions must be generated from the final narration audio and reviewed against playback. |
@@ -59,7 +59,7 @@ Illustrative visuals, if used, will be identified as illustrations rather than d
 ## Next actions
 
 1. Complete owner/editor claim-by-claim review and approve the narration script; source-checked is not the same as independently verified.
-2. Produce the ten storyboard visuals as original assets and record complete asset provenance and rights evidence for every file.
+2. Convert the ten original SVGs to PNG, review factual labels and mobile readability, compute SHA-256 hashes, and complete owner rights review.
 3. Select a voice model and verify its exact license, sidecar, URLs, and hashes.
 4. Create `config/episode-01.json` using only real cleared assets and verified voice inputs.
 5. Run the release-gate validator and address every blocker before dispatching a render.
