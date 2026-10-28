@@ -31,8 +31,8 @@ def verify_video(video_id: str, *, youtube: Any, expected_title: str | None = No
     if expected_visibility is not None and status.get("privacyStatus") != expected_visibility:
         mismatches.append("visibility_mismatch")
     processing_status = processing.get("processingStatus", "unknown")
-    if processing_status in {"failed", "terminated"}:
-        mismatches.append("processing_failed")
+    if processing_status != "succeeded":
+        mismatches.append("processing_not_succeeded")
     if mismatches:
         raise VerificationError("post-upload verification failed: " + ", ".join(mismatches))
     return {
