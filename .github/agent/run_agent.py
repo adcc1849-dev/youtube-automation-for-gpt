@@ -41,6 +41,11 @@ def allowed_path(raw: str) -> Path:
         fail(f"Path is outside the agent's allowlist: {normalized}")
     if SKIP_NAME.search(normalized):
         fail(f"Path resembles a secret-bearing file and is blocked: {normalized}")
+    candidate = ROOT
+    for part in p.parts:
+        candidate = candidate / part
+        if candidate.is_symlink():
+            fail(f"Rejected symlink path: {normalized}")
     destination = (ROOT / p).resolve()
     if destination != ROOT and ROOT not in destination.parents:
         fail("Rejected path escaping the repository.")
