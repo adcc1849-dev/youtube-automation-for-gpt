@@ -1,6 +1,6 @@
 # Episode research draft — humanoid robots in factories
 
-**Status: RESEARCH DRAFT — NOT HUMAN-VERIFIED, NOT APPROVED FOR NARRATION OR PUBLICATION**  
+**Status: ASSISTANT SOURCE-CHECKED DRAFT — NOT OWNER-APPROVED, NOT CLEARED FOR NARRATION OR PUBLICATION**  
 Working title: *How Humanoid Robots Are Learning to Work in Factories | Current Abilities, Limits & Future*  
 Audience: US English-speaking viewers interested in AI and future technology  
 Target: 8–12 minutes; evidence-led, non-hype editorial angle
@@ -51,13 +51,13 @@ Humanoid robots have moved beyond lab-only demonstrations into selected real ind
 4. What worker consultation, training, safety, and job-design information is available from credible sources?
 5. What is the current status of each pilot/rollout as of the final fact-check date?
 
-## Source and asset rights warning
+## Independent context sources\n\n- Stanford Human-Centered AI, AI Index 2026, Robotics and Autonomous Motion: https://hai.stanford.edu/assets/files/ai_index_report_2026_chapter_2_technical.pdf. The report describes growing humanoid hardware activity while noting that widespread deployment and independently verified operational data remain limited.\n- US CDC/NIOSH, Center for Occupational Robotics Research: https://www.cdc.gov/niosh/centers/robotics.html. Use as occupational-safety context, not as a specific assessment of the BMW or GXO deployments.\n\n## Source and asset rights warning
 
 These links are **research citations, not permission to reuse photos, video, logos, music, or page graphics**. Prefer original narration and original/generated illustrative visuals with documented terms. If using company footage or imagery, separately verify the exact license/permission and retain evidence. No assets are cleared by this research note.
 
 ## Required editorial and production actions
 
-- A human editor/owner should review the source audit and final claim wording; assistant source-checking is not independent verification.
+- The source wording and independent context links have been checked by the assistant; owner/editor review is still required and is not claimed to have occurred.
 - Add a claim ID and source citation to each factual sentence in the final script.
 - Do not mark claims `human_verified` unless a human actually reviews and approves them; `source_checked` is a separate status.
 - Complete the rights ledger for each final visual, audio item, voice model, font, and music cue.
