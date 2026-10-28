@@ -23,10 +23,19 @@ class TopicQueueError(ValueError):
     """Raised for incomplete or misleading topic-scoring inputs."""
 
 
+def _validate_completed_topics(value: Any) -> list[str]:
+    if not isinstance(value, list) or any(not isinstance(item, str) for item in value):
+        raise TopicQueueError("completed topics must be a JSON list of strings")
+    if any(not item.strip() for item in value):
+        raise TopicQueueError("completed topics must not contain empty strings")
+    return value
+
+
 def rank_candidates(candidates: Any, *, completed_topics: list[str] | None = None) -> dict[str, Any]:
     if not isinstance(candidates, list):
         raise TopicQueueError("candidates must be a JSON list")
-    completed = {x.strip().casefold() for x in (completed_topics or []) if isinstance(x, str)}
+    validated_completed = _validate_completed_topics([] if completed_topics is None else completed_topics)
+    completed = {x.strip().casefold() for x in validated_completed}
     ranked = []
     seen = set()
     for index, candidate in enumerate(candidates):
@@ -102,13 +111,12 @@ def rank_file(input_path: str | Path, output_path: str | Path, *,
         raise TopicQueueError("output already exists; use a new versioned path")
     try:
         candidates = json.loads(source.read_text(encoding="utf-8"))
-        completed = []
+        completed: Any = []
         if completed_topics_path:
             completed = json.loads(Path(completed_topics_path).read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
         raise TopicQueueError("input or completed-topic file could not be read as JSON") from None
-    if completed and (not isinstance(completed, list) or any(not isinstance(x, str) for x in completed)):
-        raise TopicQueueError("completed topics must be a JSON list of strings")
+    completed = _validate_completed_topics(completed)
     result = rank_candidates(candidates, completed_topics=completed)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(result, indent=2, allow_nan=False) + "\n", encoding="utf-8")
