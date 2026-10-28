@@ -1,6 +1,6 @@
 # Episode 01 — Visual storyboard draft
 
-**Status:** Planning only. No visuals are yet created, rights-cleared, or approved for the final render.
+**Status:** Ten original SVG visual drafts have now been created under `assets/vis-001.svg` through `assets/vis-010.svg`. They are not yet PNG-rendered, owner-reviewed, rights-cleared, or approved for final render. See `ASSET_MANIFEST_DRAFT.json`.
 **Target:** 8–12 minute faceless video; US English; evidence-led, restrained technology journalism.
 **Visual policy:** Prefer original diagrams, typography, and clearly illustrative generated scenes. Do not reuse company-site photos, videos, logos, or product shots without exact reuse permission. Never present an illustration as documentary footage.
 
@@ -29,7 +29,7 @@
 For every VIS asset, record the actual file path, creator/tool, creation date, source prompt or source file, applicable tool terms, permitted commercial YouTube use, modification rights, and a hash. If a generated asset is made by a service whose terms are unclear, keep it blocked. Original diagrams authored in-repository should retain editable source files and be checked for accidental logos or third-party content.
 
 ## Handoff checklist
-- [ ] Create each planned visual and its editable source.
+- [x] Create original editable SVG source for each planned visual (conversion and review still pending).
 - [ ] Record provenance and applicable license/terms in `RIGHTS_LEDGER.md`.
 - [ ] Review every visual at mobile size and check factual labels against R1–R5.
 - [ ] Ensure illustrations cannot be mistaken for documentary footage.
