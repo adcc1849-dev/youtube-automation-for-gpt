@@ -153,6 +153,21 @@
       "visual_factual_review": "PENDING",
       "conversion_to_png": "REQUIRED_FOR_CURRENT_FFMPEG_RENDERER",
       "approved_for_render": false
+    },
+    {
+      "asset_id": "THUMB-001",
+      "path": "assets/thumbnail-draft.svg",
+      "format": "SVG",
+      "description": "Original illustrated thumbnail draft",
+      "creator": "OpenAI assistant-generated original vector source in this repository",
+      "creation_commit": "d1d35ae5f45deda3a51e00d18650ab5be1165ad9",
+      "sha256": null,
+      "sha256_status": "NOT_COMPUTED",
+      "rights_status": "PENDING_OWNER_REVIEW",
+      "commercial_use_clearance": false,
+      "visual_factual_review": "PENDING",
+      "conversion_to_png": "REQUIRED_FOR_YOUTUBE_THUMBNAIL",
+      "approved_for_render": false
     }
   ],
   "blockers": [
@@ -160,6 +175,7 @@
     "SVGs must be converted to PNG and reviewed at mobile size; current renderer expects image files and SVG compatibility is not assumed.",
     "Owner must review ownership/license terms and confirm intended commercial YouTube use before assets can be marked cleared.",
     "Voice model, sidecar, exact license, URLs and SHA-256 hashes are not supplied or verified.",
-    "Do not create a runnable production config until all mandatory approvals and asset checks pass."
+    "Do not create a runnable production config until all mandatory approvals and asset checks pass.",
+    "Thumbnail SVG must be converted to an accepted raster format and reviewed for legibility and factual framing."
   ]
 }
