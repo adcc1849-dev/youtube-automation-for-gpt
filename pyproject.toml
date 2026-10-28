@@ -24,6 +24,7 @@ btm-produce = "btm_pipeline.production_cli:main"
 btm-publish = "btm_pipeline.publish_cli:main"
 btm-analytics = "btm_pipeline.analytics_cli:main"
 btm-verify-upload = "btm_pipeline.verification_cli:main"
+btm-rank-topics = "btm_pipeline.topic_queue_cli:main"
 
 [tool.setuptools.package-data]
 btm_pipeline = ["skill_assets/LICENSE", "skill_assets/README.md", "skill_assets/skills/*/*.md", "skill_assets/skills/*/*.py", "skill_assets/skills/*/*.json", "skill_assets/templates/*.md"]
