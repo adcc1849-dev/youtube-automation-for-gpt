@@ -176,6 +176,15 @@ jobs:
           btm-publish "$RELEASE_MANIFEST_PATH" out/episode.mp4 out/upload-receipt.json --visibility "$UPLOAD_VISIBILITY"
           echo "Upload receipt written; this confirms YouTube returned a video ID, not that post-upload processing and metadata verification are complete."
 
+      - name: Verify uploaded YouTube video
+        if: inputs.upload_to_youtube && steps.production.outputs.exit_code == '0'
+        env:
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+        run: |
+          btm-verify-upload out/upload-receipt.json out/upload-verification.json
+
       - name: Upload private-run artifacts for owner review
         if: always()
         uses: actions/upload-artifact@v6
@@ -186,6 +195,7 @@ jobs:
             out/episode.mp4
             out/episode.narration.wav
             out/upload-receipt.json
+            out/upload-verification.json
           if-no-files-found: warn
           retention-days: 7
 

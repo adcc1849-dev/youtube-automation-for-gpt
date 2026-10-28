@@ -31,7 +31,7 @@ Example structure:
 
 ## Credentials and run
 
-Install the optional dependencies from `requirements-publishing.txt`. Supply `YOUTUBE_CLIENT_ID`, `YOUTUBE_CLIENT_SECRET`, and `YOUTUBE_REFRESH_TOKEN` through the environment or GitHub Actions secrets. The OAuth grant needs the YouTube upload scope. Never put credentials in a manifest, repository file, receipt, or logs.
+Install the optional dependencies from `requirements-publishing.txt`. Supply `YOUTUBE_CLIENT_ID`, `YOUTUBE_CLIENT_SECRET`, and `YOUTUBE_REFRESH_TOKEN` through the environment or GitHub Actions secrets. The OAuth grant must include both the YouTube upload scope (`youtube.upload`) and read scope (`youtube.readonly`) because the workflow verifies the uploaded video after upload. A refresh token cannot grant scopes that were not approved in the original OAuth consent; re-authorize with both scopes if needed. Never put credentials in a manifest, repository file, receipt, or logs.
 
 Run:
 
@@ -41,7 +41,7 @@ python -m btm_pipeline.publish_cli manifest.json out/episode.mp4 out/upload-rece
 
 Start with private uploads. Preserve the receipt across retries: the CLI refuses to upload if a receipt already exists, reducing accidental duplicate uploads. If the process is interrupted after YouTube accepts the upload but before a receipt is written, inspect YouTube Studio before retrying; do not assume the first request failed.
 
-The receipt confirms only that the API returned a video ID. It is not yet proof that processing finished, captions and thumbnail are present, or all metadata/visibility match. Those checks remain a required next verification step.
+The receipt confirms only that the API returned a video ID. The workflow now follows upload with an API check of video existence, title, privacy status, processing status, and duration. The verifier explicitly does not claim to validate thumbnail image, caption timing/content, or human playback quality; those remain separate checks.
 
 Public visibility is deliberately blocked by `config/publishing-policy.json` unless both `public_publishing_enabled` and `owner_public_activation_authorized` are explicitly set to true and the manifest records successful staged private end-to-end tests. Do not activate public publishing until private test upload and post-upload verification are complete. This integration does not bypass factual, rights, technical, metadata, or security gates.
 
