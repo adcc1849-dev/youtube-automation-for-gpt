@@ -28,8 +28,6 @@ That flexibility is an engineering hypothesis, not a guarantee. Two legs add bal
 
 And even when a robot performs a task successfully once, a factory needs much more than a good demonstration. It needs predictable cycle times, recovery from errors, maintainability, spare parts, clear safety procedures, and a way to stop the system when something unexpected happens.
 
-That is why the most useful early deployments are likely to be narrow. A robot may be assigned one repeatable task in a defined area, rather than being asked to do everything a human employee can do. The practical path to general-purpose work may begin with very specific jobs.
-
 ## Chapter 2 — What has been reported on real production floors?
 
 One important example comes from BMW Group's work with Figure's Figure 02 robot at its Spartanburg plant in the United States. In a company report published in 2026, BMW said the robot supported production over a ten-month period, contributing to production of more than 30,000 BMW X3 vehicles and moving over 90,000 components, with about 1,250 operating hours reported. The described task involved positioning sheet-metal parts for welding. **[R1 — SOURCE-CHECKED: BMW and Figure report these metrics; they are company-reported, not independently audited.]**
@@ -40,8 +38,6 @@ BMW's report also discusses physical separation and safety arrangements around t
 
 BMW's September 2026 report says a pilot involving Hexagon Robotics' AEON robot is underway at its Leipzig site. BMW describes testing applications including high-voltage battery assembly and component manufacturing, and says AEON delivers materials to the line. **[R3 — SOURCE-CHECKED AGAINST BMW'S REPORT; company-reported, not independently audited.]** This is a pilot, and the available source does not establish that it has delivered the same results as the Spartanburg task.
 
-This distinction is essential. A factory trial, a limited deployment, and a scaled operation are three different stages. Headlines can blur them together, but a credible technology story should not.
-
 ## Chapter 3 — Warehouses are related, but not identical
 
 Another company pursuing humanoid robotics is Agility Robotics, maker of Digit. Agility and GXO describe Digit moving totes from mobile robots and placing them on conveyors in a live warehouse/logistics setting. That kind of job can be useful where repetitive material movement is a common operational challenge. **[R4 — SOURCE-CHECKED AGAINST AGILITY/GXO'S ANNOUNCEMENT; company-reported, not independently audited.]**
@@ -49,8 +45,6 @@ Another company pursuing humanoid robotics is Agility Robotics, maker of Digit. 
 Warehouse handling and factory assembly should not be treated as interchangeable. A tote-moving task may involve predictable objects and a defined route. Assembly can demand precise alignment, tight tolerances, tool use, and coordination with a production process where a small delay can affect the next station. Success in one environment does not automatically prove readiness for the other.
 
 On 26 October 2026, Agility and GXO announced plans for Digit deployments at additional GXO sites in Statesville, North Carolina, and Lebanon, Tennessee, expected to begin in early 2027. **[R5 — SOURCE-CHECKED AGAINST THE 26 OCTOBER 2026 ANNOUNCEMENT; forward-looking plan, not a completed deployment.]** That is a forward-looking expansion plan, not a claim that those future deployments have already happened.
-
-Taken together, these examples suggest a cautious pattern: companies are looking for specific jobs where a humanoid platform might be useful, then evaluating whether the system can operate within real workplace constraints. The evidence does not support the idea that every factory is about to replace its workforce with humanoid robots.
 
 ## Chapter 4 — The difficult parts are not just walking
 
@@ -65,10 +59,6 @@ Safety is equally central. A humanoid robot has moving limbs and may carry objec
 Finally, there is the cost calculation. Purchase price is only one factor. Integration, maintenance, energy, software, downtime, support, and the value of the task all matter. A robot does not need to replace a person to be useful; it might reduce a difficult repetitive task or make a process more consistent. But a business case must be measured, not assumed.
 
 ## Chapter 5 — What would count as real progress?
-
-A useful way to judge humanoid robots is to ask five questions.
-
-Can the robot perform a clearly defined task in the actual work environment? Can it do that task reliably across many shifts, not just during a curated demonstration? Can it recover safely from ordinary mistakes? Does it fit the workplace without excessive redesign or supervision? And does the measured benefit justify the full cost?
 
 The Stanford HAI AI Index 2026 describes humanoid robotics as an area with growing hardware availability and early-stage industrial pilots, while noting that widespread deployment and verified operational data remain limited. That broader review supports separating a documented pilot from proof of general-purpose autonomy. [Independent context: https://hai.stanford.edu/assets/files/ai_index_report_2026_chapter_2_technical.pdf]\n\nFor every headline number, look for the period measured, the task performed, the amount of human support involved, and whether the result is from a trial or a scaled deployment. If a company announces a pilot, call it a pilot. If it reports completed operating hours, state that the company reported them. If a future expansion is planned, describe it in the future tense.
 
