@@ -1,0 +1,70 @@
+{
+  "episode_id": "episode-01-humanoid-robots",
+  "status": "BLOCKED_NOT_READY_FOR_RENDER",
+  "checked_at": "2026-10-28",
+  "repo_branch": "feat/episode-humanoid-research-draft",
+  "pr": 15,
+  "gates": [
+    {
+      "gate": "Topic and structure",
+      "status": "PASS_DRAFT",
+      "evidence": "SCRIPT_DRAFT.md, STORYBOARD_DRAFT.md"
+    },
+    {
+      "gate": "Source traceability",
+      "status": "ASSISTANT_SOURCE_CHECKED",
+      "evidence": "SOURCE_AUDIT.md, RESEARCH_DRAFT.md",
+      "limitation": "Company-reported figures are not independently audited; human editorial approval remains outstanding."
+    },
+    {
+      "gate": "Narration script approval",
+      "status": "BLOCKED",
+      "required": "Owner/editor must review factual claims and approve the final narration text."
+    },
+    {
+      "gate": "Visual source files",
+      "status": "DRAFTS_CREATED",
+      "evidence": "assets/vis-001.svg through assets/vis-010.svg; assets/thumbnail-draft.svg",
+      "required": "Convert to PNG and inspect all labels and mobile readability."
+    },
+    {
+      "gate": "Visual rights",
+      "status": "BLOCKED",
+      "evidence": "ASSET_MANIFEST_DRAFT.json, RIGHTS_LEDGER_DRAFT.json",
+      "required": "Owner review of ownership/license terms, hash recording, and rights validation."
+    },
+    {
+      "gate": "Voice/model rights",
+      "status": "BLOCKED",
+      "required": "Exact Piper ONNX model and sidecar, license URL, model/config URLs, SHA-256 hashes, and honest owner confirmation that intended-use terms were reviewed."
+    },
+    {
+      "gate": "Production config",
+      "status": "NOT_CREATED_ON_PURPOSE",
+      "required": "Create only after script approval and actual asset/voice paths and rights records are finalized; current runner must not be given a draft as approved input."
+    },
+    {
+      "gate": "Captions",
+      "status": "BLOCKED",
+      "required": "Generate from final narration audio and review against playback."
+    },
+    {
+      "gate": "Technical render and QC",
+      "status": "NOT_RUN",
+      "required": "Run only after mandatory inputs are approved; review audio/video quality and duration."
+    },
+    {
+      "gate": "Release manifest",
+      "status": "BLOCKED",
+      "required": "Populate with actual media paths, hashes, technical QC, rights evidence and human review results."
+    },
+    {
+      "gate": "YouTube upload/publication",
+      "status": "DISABLED",
+      "required": "No upload or publication until the owner explicitly activates it after successful private end-to-end tests."
+    }
+  ],
+  "decision": "Do not dispatch render. Do not publish. Do not mark pre-production complete while any blocked gate remains.",
+  "paid_services_used": false,
+  "secrets_committed": false
+}
