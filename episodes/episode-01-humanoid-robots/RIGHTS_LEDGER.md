@@ -1,10 +1,10 @@
 # Episode 01 — Asset rights ledger
 
-**Status:** Planning ledger only. No asset is cleared merely because a source URL is listed. Fill one row per asset actually included in the final render and retain license/permission evidence.
+**Status:** BLOCKED — see `ASSET_MANIFEST_DRAFT.json` and `RIGHTS_LEDGER_DRAFT.json`. Ten original SVG source files exist, but none is cleared for production. The draft JSON ledger intentionally fails the release validator until owner rights review, PNG conversion, factual review, and hashes are complete.
 
 | Asset ID | Intended use | File/path | Creator/source | License or written permission URL | Attribution required | Commercial YouTube use allowed? | Modifications allowed? | Evidence archived? | Decision |
 |---|---|---|---|---|---|---|---|---|---|
-| VIS-001 | Opening factory illustration | TBD | Original/generated illustration to be created for this episode | Record generator/tool terms and output provenance at creation time | TBD | Must verify terms | Must verify terms | No | BLOCKED |
+| VIS-001–VIS-010 | Ten original explanatory SVGs | `assets/vis-001.svg` … `assets/vis-010.svg` | Original vector source created in this repository; commits and paths in `ASSET_MANIFEST_DRAFT.json` | Owner must review rights and intended commercial use; no legal clearance claimed | Pending | Pending owner review | Pending owner review | No | BLOCKED |
 | VIS-002 | Robot-in-factory explanatory illustration | TBD | Original/generated illustration to be created for this episode | Record generator/tool terms and output provenance at creation time | TBD | Must verify terms | Must verify terms | No | BLOCKED |
 | VIS-003+ | Additional scenes, diagrams, charts | TBD | Prefer original graphics created for the episode | Record tool/font/license terms for each item | TBD | Must verify terms | Must verify terms | No | BLOCKED |
 | AUD-001 | Narration voice/model | TBD | Piper model not yet selected | Exact model card/license URL required | TBD | Must verify terms | Must verify terms | No | BLOCKED |
