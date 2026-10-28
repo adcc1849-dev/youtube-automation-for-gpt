@@ -111,5 +111,5 @@ def rank_file(input_path: str | Path, output_path: str | Path, *,
         raise TopicQueueError("completed topics must be a JSON list of strings")
     result = rank_candidates(candidates, completed_topics=completed)
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(json.dumps(result, indent=2, allow_nan=False) + "\\n", encoding="utf-8")
+    output.write_text(json.dumps(result, indent=2, allow_nan=False) + "\n", encoding="utf-8")
     return result
