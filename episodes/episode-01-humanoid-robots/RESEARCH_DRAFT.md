@@ -18,25 +18,6 @@ Humanoid robots have moved beyond lab-only demonstrations into selected real ind
 - **Status:** `source_checked` by assistant against the cited primary company source; not independently audited and not owner-approved.
 - **Caveat:** These are company-reported deployment metrics, not an independent audit. Be precise about the time window and task; do not imply all factory work was autonomous.
 
-### R3 — BMW's Leipzig pilot with AEON
-- **Candidate claim:** BMW announced a pilot with Hexagon Robotics at Plant Leipzig, with intended applications including high-voltage battery assembly and component manufacturing.
-- **Primary source:** https://www.press.bmwgroup.com/global/article/detail/T0455864EN/
-- **Status:** `source_checked` by assistant against the cited primary company source; not independently audited and not owner-approved.
-- **Caveat:** Separate announced/pilot plans from completed production outcomes; re-check current status before script approval.
-
-### R5 — Agility Robotics and GXO announced expansion to additional logistics sites
-- **Candidate claim:** On 26 October 2026, Agility Robotics and GXO announced plans to expand Digit deployments to sites in North Carolina and Tennessee, with deployments expected to begin in early 2027.
-- **Primary source:** https://www.agilityrobotics.com/content/gxo-and-agility-robotics-expand-humanoids-in-u-s-operations
-- **Alternate source:** https://gxo.com/de/news_article/gxo-and-agility-robotics-expand-humanoids-in-u-s-operations/
-- **Status:** `source_checked` by assistant against the cited primary company source; not independently audited and not owner-approved.
-- **Caveat:** The expansion and dates are announcements/future plans, not evidence that those future deployments have already started. Source contains forward-looking statements from interested parties.
-
-### R4 — Digit is being used for repetitive material-handling tasks at GXO
-- **Candidate claim:** Agility and GXO describe Digit moving totes and placing them on conveyors in a live warehouse environment.
-- **Primary source:** https://www.agilityrobotics.com/content/gxo-signs-industry-first-multi-year-agreement-with-agility-robotics
-- **Status:** `source_checked` by assistant against the cited primary company source; not independently audited and not owner-approved.
-- **Caveat:** This is warehouse logistics, not automotive factory assembly. Label the setting accurately.
-
 ### R2 — BMW reported safety arrangements during the Spartanburg pilot
 - **Candidate claim:** BMW says the Spartanburg deployment led to revised safety concepts including additional barriers and partitions, alongside improved 5G coverage in the hall.
 - **Primary source:** https://www.bmwgroup.com/en/news/general/2026/humanoid-robot-in-leipzig.html
@@ -62,3 +43,22 @@ These links are **research citations, not permission to reuse photos, video, log
 - Do not mark claims `human_verified` unless a human actually reviews and approves them; `source_checked` is a separate status.
 - Complete the rights ledger for each final visual, audio item, voice model, font, and music cue.
 - Approve the script and storyboard before dispatching the cloud render.
+
+### R3 — BMW's Leipzig pilot with AEON
+- **Candidate claim:** BMW announced a pilot with Hexagon Robotics at Plant Leipzig, with intended applications including high-voltage battery assembly and component manufacturing.
+- **Primary source:** https://www.press.bmwgroup.com/global/article/detail/T0455864EN/
+- **Status:** `source_checked` by assistant against the cited primary company source; not independently audited and not owner-approved.
+- **Caveat:** Separate announced/pilot plans from completed production outcomes; re-check current status before script approval.
+
+### R4 — Digit is being used for repetitive material-handling tasks at GXO
+- **Candidate claim:** Agility and GXO describe Digit moving totes and placing them on conveyors in a live warehouse environment.
+- **Primary source:** https://www.agilityrobotics.com/content/gxo-signs-industry-first-multi-year-agreement-with-agility-robotics
+- **Status:** `source_checked` by assistant against the cited primary company source; not independently audited and not owner-approved.
+- **Caveat:** This is warehouse logistics, not automotive factory assembly. Label the setting accurately.
+
+### R5 — Agility Robotics and GXO announced expansion to additional logistics sites
+- **Candidate claim:** On 26 October 2026, Agility Robotics and GXO announced plans to expand Digit deployments to sites in North Carolina and Tennessee, with deployments expected to begin in early 2027.
+- **Primary source:** https://www.agilityrobotics.com/content/gxo-and-agility-robotics-expand-humanoids-in-u-s-operations
+- **Alternate source:** https://gxo.com/de/news_article/gxo-and-agility-robotics-expand-humanoids-in-u-s-operations/
+- **Status:** `source_checked` by assistant against the cited primary company source; not independently audited and not owner-approved.
+- **Caveat:** The expansion and dates are announcements/future plans, not evidence that those future deployments have already started. Source contains forward-looking statements from interested parties.
