@@ -47,7 +47,7 @@ def test_visibility_mismatch_fails_closed():
 
 
 def test_processing_failure_fails_closed():
-    with pytest.raises(VerificationError, match="processing_failed"):
+    with pytest.raises(VerificationError, match="processing_not_succeeded"):
         verify_video("abc123", youtube=Service(payload(processing="failed")))
 
 
