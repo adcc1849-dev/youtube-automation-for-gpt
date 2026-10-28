@@ -78,7 +78,9 @@ This is Beyond the Machine. We follow the technology beyond the headline, to the
 
 ## Source register — primary-source review recorded in `SOURCE_AUDIT.md`; final editorial review still required
 
-- **R1 / R2:** BMW Group report on humanoid robotics at Spartanburg and Leipzig: https://www.bmwgroup.com/en/news/general/2026/humanoid-robot-in-leipzig.html\n- **Independent context:** Stanford HAI, AI Index 2026, robotics and autonomous motion: https://hai.stanford.edu/assets/files/ai_index_report_2026_chapter_2_technical.pdf\n- **Workplace safety context:** US NIOSH Center for Occupational Robotics Research: https://www.cdc.gov/niosh/centers/robotics.html
+- **R1 / R2:** BMW Group report on humanoid robotics at Spartanburg and Leipzig: https://www.bmwgroup.com/en/news/general/2026/humanoid-robot-in-leipzig.html
+- **Independent context:** Stanford HAI, AI Index 2026, robotics and autonomous motion: https://hai.stanford.edu/assets/files/ai_index_report_2026_chapter_2_technical.pdf
+- **Workplace safety context:** US NIOSH Center for Occupational Robotics Research: https://www.cdc.gov/niosh/centers/robotics.html
 - **R3:** BMW Group press release on the Leipzig pilot: https://www.press.bmwgroup.com/global/article/detail/T0455864EN/
 - **R4:** Agility Robotics and GXO announcement on Digit in logistics operations: https://www.agilityrobotics.com/content/gxo-signs-industry-first-multi-year-agreement-with-agility-robotics
 - **R5:** Agility Robotics announcement of planned expansion to additional GXO sites: https://www.agilityrobotics.com/content/gxo-and-agility-robotics-expand-humanoids-in-u-s-operations
