@@ -261,6 +261,32 @@
       "restricted_or_unclear": true,
       "sha256": null,
       "notes": "Must remain blocked until owner rights review, PNG conversion, factual review and hash recording."
+    },
+    {
+      "asset_id": "THUMB-001",
+      "kind": "original",
+      "description": "Original illustrated thumbnail draft",
+      "repository_path": "assets/thumbnail-draft.svg",
+      "creation_commit": "d1d35ae5f45deda3a51e00d18650ab5be1165ad9",
+      "creator": "OpenAI assistant-generated original vector source in this repository",
+      "source_url": "https://github.com/adcc1849-dev/youtube-automation-for-gpt/blob/feat/episode-humanoid-research-draft/episodes/episode-01-humanoid-robots/assets/thumbnail-draft.svg",
+      "captured_at": "2026-10-28",
+      "rights_status": "pending",
+      "license_family": "unknown",
+      "license_name": "Owner must review project license/ownership terms for generated visual assets",
+      "license_url": "https://github.com/adcc1849-dev/youtube-automation-for-gpt",
+      "proof_url": "https://github.com/adcc1849-dev/youtube-automation-for-gpt/blob/feat/episode-humanoid-research-draft/episodes/episode-01-humanoid-robots/ASSET_MANIFEST_DRAFT.json",
+      "intended_use": "Proposed YouTube thumbnail for Episode 01; not yet cleared",
+      "reviewed_by": "PENDING_OWNER_REVIEW",
+      "reviewed_at": "2026-10-28",
+      "commercial_use_allowed": false,
+      "modification_allowed": false,
+      "attribution_required": false,
+      "attribution_text": "",
+      "rights_reviewed": false,
+      "restricted_or_unclear": true,
+      "sha256": null,
+      "notes": "Must remain blocked until owner rights review, raster conversion, factual/design review and hash recording."
     }
   ],
   "not_cleared_notice": "This ledger deliberately fails the production rights validator. No rights or legal clearance is claimed."
