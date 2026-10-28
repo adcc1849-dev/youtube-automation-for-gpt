@@ -2,7 +2,7 @@
 
 **Working title:** How Humanoid Robots Are Learning to Work in Factories  
 **Target runtime:** 8–12 minutes at a measured narration pace  
-**Status:** Editorial draft only. Not fact-checked by a human, not approved for narration, and not cleared for publication.  
+**Status:** Editorial draft; assistant primary-source and independent-context checks recorded. Not owner-approved, not cleared for narration, and not cleared for publication.  
 **Research packet:** `RESEARCH_DRAFT.md`  
 **Important:** Claim IDs below refer to candidate claims that still require human verification. Source links are evidence to inspect, not permission to reuse source-page photos or footage.
 
@@ -32,11 +32,11 @@ That is why the most useful early deployments are likely to be narrow. A robot m
 
 ## Chapter 2 — What has been reported on real production floors?
 
-One important example comes from BMW Group's work with Figure's Figure 02 robot at its Spartanburg plant in the United States. In a company report published in 2026, BMW said the robot supported production over a ten-month period, contributing to production of more than 30,000 BMW X3 vehicles and moving over 90,000 components, with about 1,250 operating hours reported. The described task involved positioning sheet-metal parts for welding. **[R1 — UNVERIFIED: check the original BMW report, exact wording, dates, and metrics before narration.]**
+One important example comes from BMW Group's work with Figure's Figure 02 robot at its Spartanburg plant in the United States. In a company report published in 2026, BMW said the robot supported production over a ten-month period, contributing to production of more than 30,000 BMW X3 vehicles and moving over 90,000 components, with about 1,250 operating hours reported. The described task involved positioning sheet-metal parts for welding. **[R1 — SOURCE-CHECKED: BMW and Figure report these metrics; they are company-reported, not independently audited.]**
 
 Those numbers are meaningful because they describe an industrial task, not just a robot walking around a lab. They also need context. They are company-reported figures, and a component-handling task does not mean the robot independently builds an entire vehicle. A fair account should say what the robot was assigned to do, where it operated, and what support or safeguards were part of the setup.
 
-BMW's report also discusses physical separation and safety arrangements around the work area. **[R2 — UNVERIFIED: inspect the source and confirm the exact safety details.]** That matters because deploying a robot in a factory is not only a question of dexterity. The site has to manage interaction with people, equipment, moving parts, and production schedules.
+BMW's report also discusses physical separation and safety arrangements around the work area. **[R2 — SOURCE-CHECKED: BMW reports these measures; this is not an independent safety assessment.]** That matters because deploying a robot in a factory is not only a question of dexterity. The site has to manage interaction with people, equipment, moving parts, and production schedules.
 
 BMW's September 2026 report says a pilot involving Hexagon Robotics' AEON robot is underway at its Leipzig site. BMW describes testing applications including high-voltage battery assembly and component manufacturing, and says AEON delivers materials to the line. **[R3 — SOURCE-CHECKED AGAINST BMW'S REPORT; company-reported, not independently audited.]** This is a pilot, and the available source does not establish that it has delivered the same results as the Spartanburg task.
 
@@ -60,7 +60,7 @@ First, perception: the robot has to identify the correct object and estimate whe
 
 Then comes uptime. A production manager will ask how often the robot needs intervention, how long maintenance takes, whether a trained operator must supervise it, and how quickly it can be brought back online. A machine can look impressive in a video yet still be a poor fit if it interrupts production too often.
 
-Safety is equally central. A humanoid robot has moving limbs and may carry objects through shared spaces. Its deployment requires a risk assessment, appropriate guarding or separation, emergency-stop procedures, training, and clear responsibility for supervision. The exact controls depend on the machine and the workplace; they should never be inferred from a marketing clip.
+Safety is equally central. A humanoid robot has moving limbs and may carry objects through shared spaces. Its deployment requires a risk assessment, appropriate guarding or separation, emergency-stop procedures, training, and clear responsibility for supervision. The exact controls depend on the machine and the workplace; they should never be inferred from a marketing clip. The US National Institute for Occupational Safety and Health (NIOSH) identifies evaluating workplace robot hazards, injury trends, and safe human-robot interaction as ongoing occupational-safety priorities. That supports treating safety as a site-specific risk-management question, not assuming a robot is safe simply because a pilot is operating. [Independent safety context: https://www.cdc.gov/niosh/centers/robotics.html]
 
 Finally, there is the cost calculation. Purchase price is only one factor. Integration, maintenance, energy, software, downtime, support, and the value of the task all matter. A robot does not need to replace a person to be useful; it might reduce a difficult repetitive task or make a process more consistent. But a business case must be measured, not assumed.
 
@@ -70,7 +70,7 @@ A useful way to judge humanoid robots is to ask five questions.
 
 Can the robot perform a clearly defined task in the actual work environment? Can it do that task reliably across many shifts, not just during a curated demonstration? Can it recover safely from ordinary mistakes? Does it fit the workplace without excessive redesign or supervision? And does the measured benefit justify the full cost?
 
-For every headline number, look for the period measured, the task performed, the amount of human support involved, and whether the result is from a trial or a scaled deployment. If a company announces a pilot, call it a pilot. If it reports completed operating hours, state that the company reported them. If a future expansion is planned, describe it in the future tense.
+The Stanford HAI AI Index 2026 describes humanoid robotics as an area with growing hardware availability and early-stage industrial pilots, while noting that widespread deployment and verified operational data remain limited. That broader review supports separating a documented pilot from proof of general-purpose autonomy. [Independent context: https://hai.stanford.edu/assets/files/ai_index_report_2026_chapter_2_technical.pdf]\n\nFor every headline number, look for the period measured, the task performed, the amount of human support involved, and whether the result is from a trial or a scaled deployment. If a company announces a pilot, call it a pilot. If it reports completed operating hours, state that the company reported them. If a future expansion is planned, describe it in the future tense.
 
 That discipline does not diminish the technology. It makes the story more useful. Industrial robotics has always advanced through a combination of engineering breakthroughs and careful process design. Humanoids will need to meet the same standards.
 
@@ -88,11 +88,11 @@ This is Beyond the Machine. We follow the technology beyond the headline, to the
 
 ## Source register — primary-source review recorded in `SOURCE_AUDIT.md`; final editorial review still required
 
-- **R1 / R2:** BMW Group report on humanoid robotics at Spartanburg and Leipzig: https://www.bmwgroup.com/en/news/general/2026/humanoid-robot-in-leipzig.html
+- **R1 / R2:** BMW Group report on humanoid robotics at Spartanburg and Leipzig: https://www.bmwgroup.com/en/news/general/2026/humanoid-robot-in-leipzig.html\n- **Independent context:** Stanford HAI, AI Index 2026, robotics and autonomous motion: https://hai.stanford.edu/assets/files/ai_index_report_2026_chapter_2_technical.pdf\n- **Workplace safety context:** US NIOSH Center for Occupational Robotics Research: https://www.cdc.gov/niosh/centers/robotics.html
 - **R3:** BMW Group press release on the Leipzig pilot: https://www.press.bmwgroup.com/global/article/detail/T0455864EN/
 - **R4:** Agility Robotics and GXO announcement on Digit in logistics operations: https://www.agilityrobotics.com/content/gxo-signs-industry-first-multi-year-agreement-with-agility-robotics
 - **R5:** Agility Robotics announcement of planned expansion to additional GXO sites: https://www.agilityrobotics.com/content/gxo-and-agility-robotics-expand-humanoids-in-u-s-operations
 
 ## Production hold
 
-This draft remains NOT APPROVED FOR NARRATION. Primary-source wording for the listed deployment claims has been checked and recorded in `SOURCE_AUDIT.md`, but company-reported metrics are not independently audited, and final editorial review, rights clearance, voice licensing, and the production review gate remain outstanding. Use original or explicitly licensed visuals; source-page media is not automatically reusable.
+This draft remains NOT APPROVED FOR NARRATION. Primary-source wording and independent context links have been recorded, but company-reported metrics are not independently audited. Final editorial review, asset rights clearance, voice licensing, a production config, and the mandatory release-gate report remain outstanding. Use original or explicitly licensed visuals; source-page media is not automatically reusable.
