@@ -32,23 +32,23 @@ That is why the most useful early deployments are likely to be narrow. A robot m
 
 ## Chapter 2 — What has been reported on real production floors?
 
-One important example comes from BMW Group's work with Figure's Figure 02 robot at its Spartanburg plant in the United States. In a company report published in 2026, BMW said the robot supported production over a ten-month period, handling more than 30,000 BMW X3 vehicles' worth of work context and moving over 90,000 components, with about 1,250 operating hours reported. The described task involved positioning sheet-metal parts for welding. **[R1 — UNVERIFIED: check the original BMW report, exact wording, dates, and metrics before narration.]**
+One important example comes from BMW Group's work with Figure's Figure 02 robot at its Spartanburg plant in the United States. In a company report published in 2026, BMW said the robot supported production over a ten-month period, contributing to production of more than 30,000 BMW X3 vehicles and moving over 90,000 components, with about 1,250 operating hours reported. The described task involved positioning sheet-metal parts for welding. **[R1 — UNVERIFIED: check the original BMW report, exact wording, dates, and metrics before narration.]**
 
 Those numbers are meaningful because they describe an industrial task, not just a robot walking around a lab. They also need context. They are company-reported figures, and a component-handling task does not mean the robot independently builds an entire vehicle. A fair account should say what the robot was assigned to do, where it operated, and what support or safeguards were part of the setup.
 
 BMW's report also discusses physical separation and safety arrangements around the work area. **[R2 — UNVERIFIED: inspect the source and confirm the exact safety details.]** That matters because deploying a robot in a factory is not only a question of dexterity. The site has to manage interaction with people, equipment, moving parts, and production schedules.
 
-BMW has also announced a separate pilot at its Leipzig site involving Hexagon and a different humanoid platform, AEON. The announced work concerns testing and potential use in areas including battery assembly and component manufacturing. **[R3 — UNVERIFIED: confirm announcement wording and keep future plans distinct from completed results.]** An announced pilot is evidence of industrial interest; it is not evidence that the pilot has already delivered the same results as an established production task.
+BMW's September 2026 report says a pilot involving Hexagon Robotics' AEON robot is underway at its Leipzig site. BMW describes testing applications including high-voltage battery assembly and component manufacturing, and says AEON delivers materials to the line. **[R3 — SOURCE-CHECKED AGAINST BMW'S REPORT; company-reported, not independently audited.]** This is a pilot, and the available source does not establish that it has delivered the same results as the Spartanburg task.
 
 This distinction is essential. A factory trial, a limited deployment, and a scaled operation are three different stages. Headlines can blur them together, but a credible technology story should not.
 
 ## Chapter 3 — Warehouses are related, but not identical
 
-Another company pursuing humanoid robotics is Agility Robotics, maker of Digit. Digit has been described in logistics work moving totes and placing them on conveyors. That kind of job can be useful in a warehouse, where repetitive material movement is a common operational challenge. **[R4 — UNVERIFIED: check the original Agility/GXO announcement and confirm the exact task and site.]**
+Another company pursuing humanoid robotics is Agility Robotics, maker of Digit. Agility and GXO describe Digit moving totes from mobile robots and placing them on conveyors in a live warehouse/logistics setting. That kind of job can be useful where repetitive material movement is a common operational challenge. **[R4 — SOURCE-CHECKED AGAINST AGILITY/GXO'S ANNOUNCEMENT; company-reported, not independently audited.]**
 
 Warehouse handling and factory assembly should not be treated as interchangeable. A tote-moving task may involve predictable objects and a defined route. Assembly can demand precise alignment, tight tolerances, tool use, and coordination with a production process where a small delay can affect the next station. Success in one environment does not automatically prove readiness for the other.
 
-In October 2026, Agility announced plans to expand Digit deployments to additional GXO sites in North Carolina and Tennessee in early 2027. **[R5 — UNVERIFIED: verify the date and exact wording in the original announcement.]** That is a forward-looking expansion plan, not a claim that those future deployments have already happened.
+On 26 October 2026, Agility and GXO announced plans for Digit deployments at additional GXO sites in Statesville, North Carolina, and Lebanon, Tennessee, expected to begin in early 2027. **[R5 — SOURCE-CHECKED AGAINST THE 26 OCTOBER 2026 ANNOUNCEMENT; forward-looking plan, not a completed deployment.]** That is a forward-looking expansion plan, not a claim that those future deployments have already happened.
 
 Taken together, these examples suggest a cautious pattern: companies are looking for specific jobs where a humanoid platform might be useful, then evaluating whether the system can operate within real workplace constraints. The evidence does not support the idea that every factory is about to replace its workforce with humanoid robots.
 
@@ -86,7 +86,7 @@ This is Beyond the Machine. We follow the technology beyond the headline, to the
 
 ---
 
-## Source register — human verification required
+## Source register — primary-source review recorded in `SOURCE_AUDIT.md`; final editorial review still required
 
 - **R1 / R2:** BMW Group report on humanoid robotics at Spartanburg and Leipzig: https://www.bmwgroup.com/en/news/general/2026/humanoid-robot-in-leipzig.html
 - **R3:** BMW Group press release on the Leipzig pilot: https://www.press.bmwgroup.com/global/article/detail/T0455864EN/
@@ -95,4 +95,4 @@ This is Beyond the Machine. We follow the technology beyond the headline, to the
 
 ## Production hold
 
-Do not mark this script approved, do not mark any claim human-verified, and do not narrate or publish this draft until a human has checked every claim against the linked primary source and the production review gate has passed. Use original or explicitly licensed visuals; source-page media is not automatically reusable.
+This draft remains NOT APPROVED FOR NARRATION. Primary-source wording for the listed deployment claims has been checked and recorded in `SOURCE_AUDIT.md`, but company-reported metrics are not independently audited, and final editorial review, rights clearance, voice licensing, and the production review gate remain outstanding. Use original or explicitly licensed visuals; source-page media is not automatically reusable.
