@@ -92,5 +92,5 @@ def verify_receipt(receipt_path: str | Path, output_path: str | Path) -> dict[st
     if output.exists():
         raise VerificationError("verification output already exists; choose a new path")
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(json.dumps(result, indent=2) + "\\n", encoding="utf-8")
+    output.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     return result
