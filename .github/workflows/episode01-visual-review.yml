@@ -1,0 +1,62 @@
+name: Episode 01 visual review artifacts
+
+on:
+  pull_request:
+    paths:
+      - "episodes/episode-01-humanoid-robots/assets/**.svg"
+      - "scripts/render_episode01_visuals.py"
+      - "pyproject.toml"
+      - ".github/workflows/episode01-visual-review.yml"
+  push:
+    branches: ["feat/**"]
+    paths:
+      - "episodes/episode-01-humanoid-robots/assets/**.svg"
+      - "scripts/render_episode01_visuals.py"
+      - "pyproject.toml"
+      - ".github/workflows/episode01-visual-review.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rasterize-review-only:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install optional visual dependency
+        run: python -m pip install -e ".[visuals]"
+      - name: Rasterize draft visuals (no publishing)
+        run: python scripts/render_episode01_visuals.py
+      - name: Validate PNG draft set and rights flags
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path("episodes/episode-01-humanoid-robots")
+          report = json.loads((root / "RASTER_OUTPUTS_DRAFT.json").read_text())
+          outputs = report["outputs"]
+          assert len(outputs) == 11, f"Expected 11 PNGs, found {len(outputs)}"
+          assert report["status"] == "RASTER_DRAFTS_CREATED_NOT_CLEARED"
+          for item in outputs:
+              path = Path(item["output"])
+              data = path.read_bytes()
+              assert data.startswith(b"\\x89PNG\\r\\n\\x1a\\n"), f"Not a PNG: {path}"
+              assert len(item["sha256"]) == 64
+              assert item["approved_for_render"] is False
+              assert item["rights_status"] == "PENDING_OWNER_REVIEW"
+          print("Validated 10 scene PNGs + thumbnail; all remain uncleared drafts.")
+          PY
+      - name: Upload review-only visual artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: episode-01-visual-review-drafts
+          path: |
+            episodes/episode-01-humanoid-robots/assets/*.png
+            episodes/episode-01-humanoid-robots/RASTER_OUTPUTS_DRAFT.json
+          if-no-files-found: error
+          retention-days: 7
