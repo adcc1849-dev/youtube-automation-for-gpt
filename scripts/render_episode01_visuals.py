@@ -21,6 +21,7 @@ OUTPUTS = [
     *((ASSET_DIR / f"vis-{i:03d}.svg", ASSET_DIR / f"vis-{i:03d}.png", 1920, 1080) for i in range(1, 11)),
     (ASSET_DIR / "thumbnail-draft.svg", ASSET_DIR / "thumbnail-draft.png", 1280, 720),
 ]
+REPORT_PATH = ASSET_DIR.parent / "RASTER_OUTPUTS_DRAFT.json"
 
 
 def sha256(path: Path) -> str:
@@ -32,12 +33,18 @@ def sha256(path: Path) -> str:
 
 
 def main() -> int:
-    records = []
-    for source, target, width, height in OUTPUTS:
+    # Preflight all inputs and outputs before writing anything. This prevents a
+    # late missing file or existing output from leaving a partial raster set.
+    for source, target, _width, _height in OUTPUTS:
         if not source.is_file():
             raise SystemExit(f"Missing SVG source: {source}")
         if target.exists():
             raise SystemExit(f"Refusing to overwrite existing output: {target}")
+    if REPORT_PATH.exists():
+        raise SystemExit(f"Refusing to overwrite report: {REPORT_PATH}")
+
+    records = []
+    for source, target, width, height in OUTPUTS:
         cairosvg.svg2png(url=str(source), write_to=str(target), output_width=width, output_height=height)
         records.append({
             "source": str(source.relative_to(ROOT)),
@@ -54,11 +61,8 @@ def main() -> int:
         "outputs": records,
         "notice": "Hashes identify these generated PNG files only. They do not establish ownership, license applicability, factual approval, or publication clearance.",
     }
-    report_path = ASSET_DIR.parent / "RASTER_OUTPUTS_DRAFT.json"
-    if report_path.exists():
-        raise SystemExit(f"Refusing to overwrite existing report: {report_path}")
-    report_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
-    print(f"Created {len(records)} PNG drafts and {report_path.relative_to(ROOT)}")
+    REPORT_PATH.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+    print(f"Created {len(records)} PNG drafts and {REPORT_PATH.relative_to(ROOT)}")
     return 0
 
 
