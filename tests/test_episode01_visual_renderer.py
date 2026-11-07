@@ -14,8 +14,8 @@ def load_renderer(monkeypatch, tmp_path):
     spec = importlib.util.spec_from_file_location("episode01_renderer", SCRIPT)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
-    asset_dir = tmp_path / "assets"
-    asset_dir.mkdir()
+    asset_dir = tmp_path / "episodes" / "episode-01-humanoid-robots" / "assets"
+    asset_dir.mkdir(parents=True)
     for i in range(1, 11):
         (asset_dir / f"vis-{i:03d}.svg").write_text("<svg/>", encoding="utf-8")
     (asset_dir / "thumbnail-draft.svg").write_text("<svg/>", encoding="utf-8")
