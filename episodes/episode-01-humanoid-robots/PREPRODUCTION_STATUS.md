@@ -13,7 +13,7 @@
 - Script claim IDs are intended to map as R1 Spartanburg operating metrics, R2 reported Spartanburg safety arrangements, R3 Leipzig/AEON pilot, R4 Digit warehouse logistics, and R5 planned GXO expansion.
 - Independent context sources added: Stanford HAI AI Index 2026 and the US NIOSH Center for Occupational Robotics Research.
 - Asset rights ledger template added.
-- Visual storyboard added and ten original SVG draft assets created (`assets/vis-001.svg` through `assets/vis-010.svg`). They remain pending owner/factual/rights review and conversion to PNG; see `ASSET_MANIFEST_DRAFT.json` and `RIGHTS_LEDGER_DRAFT.json`.
+- Visual storyboard added and ten original SVG draft assets plus an original thumbnail SVG created. Added `scripts/render_episode01_visuals.py` and optional `.[visuals]` dependency to generate PNG review copies and a SHA-256 raster report; conversion has not yet been run in this environment. Assets remain pending owner/factual/rights review; see `ASSET_MANIFEST_DRAFT.json` and `RIGHTS_LEDGER_DRAFT.json`.
 - Draft remains unmerged; no render or upload was triggered.
 
 ## Mandatory gate status
@@ -59,7 +59,7 @@ Illustrative visuals, if used, will be identified as illustrations rather than d
 ## Next actions
 
 1. Complete owner/editor claim-by-claim review and approve the narration script; source-checked is not the same as independently verified.
-2. Convert the ten original SVGs to PNG, review factual labels and mobile readability, compute SHA-256 hashes, and complete owner rights review.
+2. Run `python -m pip install -e ".[visuals]"` then `python scripts/render_episode01_visuals.py`; review PNGs at mobile size, then complete owner rights review. The script records raster hashes but does not grant clearance.
 3. Select a voice model and verify its exact license, sidecar, URLs, and hashes.
 4. Create `config/episode-01.json` using only real cleared assets and verified voice inputs.
 5. Run the release-gate validator and address every blocker before dispatching a render.
