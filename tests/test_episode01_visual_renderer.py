@@ -21,6 +21,7 @@ def load_renderer(monkeypatch, tmp_path):
     (asset_dir / "thumbnail-draft.svg").write_text("<svg/>", encoding="utf-8")
     module.ROOT = tmp_path
     module.ASSET_DIR = asset_dir
+    module.REPORT_PATH = asset_dir.parent / "RASTER_OUTPUTS_DRAFT.json"
     module.OUTPUTS = [
         *((asset_dir / f"vis-{i:03d}.svg", asset_dir / f"vis-{i:03d}.png", 1920, 1080) for i in range(1, 11)),
         (asset_dir / "thumbnail-draft.svg", asset_dir / "thumbnail-draft.png", 1280, 720),
@@ -57,7 +58,7 @@ def test_renderer_preflights_every_output_before_writing(monkeypatch, tmp_path):
 def test_renderer_refuses_existing_report_before_conversion(monkeypatch, tmp_path):
     module, asset_dir = load_renderer(monkeypatch, tmp_path)
     report = tmp_path / "episodes/episode-01-humanoid-robots/RASTER_OUTPUTS_DRAFT.json"
-    report.parent.mkdir(parents=True)
+    report.parent.mkdir(parents=True, exist_ok=True)
     report.write_text("owner report", encoding="utf-8")
     try:
         module.main()
