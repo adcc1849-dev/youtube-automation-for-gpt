@@ -62,3 +62,15 @@ On Android/Termux, use Termux's available Python and create the virtual environm
 Never commit API keys, bot tokens, OAuth credentials, or personal access tokens. Store future credentials as narrowly scoped GitHub Actions secrets. CI and the cloud production workflow use read-only repository permissions and do not publish content.
 
 The channel owner controls the budget, policy, and final launch decision. Automation performs authorized production tasks but cannot silently enable public publishing or paid services.
+
+
+## Episode 01 visual draft conversion
+
+The Episode 01 storyboard includes original editable SVG drafts. To rasterize them for review (not publication clearance):
+
+```bash
+python -m pip install -e ".[visuals]"
+python scripts/render_episode01_visuals.py
+```
+
+The command creates PNG drafts and `episodes/episode-01-humanoid-robots/RASTER_OUTPUTS_DRAFT.json` with SHA-256 hashes. It refuses to overwrite existing outputs. Hashes are file identifiers only; they do not mean the assets are rights-cleared or approved for rendering/publication.
